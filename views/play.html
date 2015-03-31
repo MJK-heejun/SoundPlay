@@ -1,0 +1,35 @@
+
+
+<div ng-if="type==2">
+type2
+
+
+</div>
+
+
+
+
+<div ng-click="play()">
+	play
+</div>
+<div ng-click="pause()">
+	pause
+</div>
+<div ng-click="stop()">
+	stop
+</div>
+<div ng-click="lowFilter()">
+	lowFilter
+</div>
+
+<form>
+	playback rate
+  <input type="range" ng-model="playbackrate" min="0" max="3" step="0.1" value="1">
+</form>
+
+<div id="gamma">
+	print gamma
+</div>
+<div id="xPos">
+	print xPos
+</div>

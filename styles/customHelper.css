@@ -1,0 +1,130 @@
+.border{
+	border: 1px solid black;
+}
+
+.border-r{
+  border: 1px solid red;
+}
+
+.border-b{
+  border: 1px solid blue;
+}
+
+.border-g{
+  border: 1px solid green;
+}
+
+.float-left{
+  float: left;
+}
+
+.c-white{
+  color: white;
+}
+
+.tmp-h{
+  height: 150px;
+}
+
+.da0{
+  padding: 0;
+  margin: 0;
+}
+.padding-0{
+  padding: 0;
+}
+.padding-1{
+  padding: 1px;
+}
+.margin-0{
+  margin: 0;
+}
+
+.margin-5{
+  margin: 5px;
+}
+
+.width-30{
+  width: 30%;
+}
+
+.width-50{
+  width: 50%;
+}
+
+.width-45{
+  width: 45%;
+}
+
+.width-80{
+  width: 80%;
+}
+
+.width-100{
+  width: 100%;
+}
+
+.height-100{
+  height: 100%;
+}
+
+.tac{
+  text-align: center;
+}
+.tal{
+  text-align: left;
+}
+.tar{
+  text-align: right;
+}
+
+.lato-semi-bold{
+  font-family: 'LatoSemibold', Georgia;
+}
+.lato-light{
+  font-family: 'LatoLight', Georgia;
+}
+
+.pos-rel{
+  position: relative;
+}
+
+.pos-abs{
+  position: absolute;
+}
+
+.pos-fix{
+  position: fixed;
+}
+
+.vertical-align{
+    display: flex;
+    align-items: center;
+}
+
+.vertical-align-table-p{
+  display: table;
+}
+
+.vertical-align-table-c{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.margin-tb-auto{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.margin-lr-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.margin-top-30{
+  margin-top: 30%;
+}
+
+.display-t{
+  display: table;
+}

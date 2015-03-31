@@ -1,0 +1,56 @@
+
+/*
+.page{
+  position: absolute;
+}
+
+
+.page-home.ng-enter{ 
+  -webkit-animation:slideInRight 0.5s both ease-in;   
+  animation:slideInRight 0.5s both ease-in; 
+}
+
+.page-home.ng-leave{ 
+  -webkit-animation:slideOutLeft 0.5s both ease-in;   
+  animation:slideOutLeft 0.5s both ease-in; 
+}
+
+.page-play.ng-enter{ 
+  -webkit-animation:slideInRight 0.5s both ease-in;   
+  animation:slideInRight 0.5s both ease-in; 
+}
+.page-play.ng-leave{ 
+  -webkit-animation:slideOutLeft 0.5s both ease-in;   
+  animation:slideOutLeft 0.5s both ease-in; 
+}
+
+
+.page-result.ng-enter{ 
+  -webkit-animation:slideInRight 0.5s both ease-in;   
+  animation:slideInRight 0.5s both ease-in; 
+}
+.page-result.ng-leave{ 
+  -webkit-animation:slideOutLeft 0.5s both ease-in;   
+  animation:slideOutLeft 0.5s both ease-in; 
+}
+*/
+
+/*
+.timer-shake{
+  -webkit-animation: shake 5s; 
+  animation: shake 5s;
+}
+*/
+
+
+/*
+
+.sample-show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+}
+*/
