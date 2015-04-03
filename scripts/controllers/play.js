@@ -54,9 +54,9 @@ globals.current_music_id = 48230395;
           var url = "http://api.soundcloud.com/tracks/48230395/stream?client_id=22a6f6d4d6138acff711c666f09a62c7";
         request.open("GET", url, true);
         request.responseType = "arraybuffer";
-        //alert("making Http Request");
+        alert("making Http Request");
         request.onload = function(){
-            //alert("decoding audio");
+            alert("decoding audio");
             //'request.response' is arraybuffer
             //'buffer' is decoded data - type = AudioBuffer: (IEEE754) 32 bits floating point buffer (float32)
             g_sound.context.decodeAudioData(request.response, function(buffer){
@@ -108,6 +108,7 @@ globals.current_music_id = 48230395;
         };
         request.send();
       }else{
+        alert('previous setting retrieved for the music');
         console.log('previous setting retrieved for the music');  
 
         $scope.$apply(function() {
