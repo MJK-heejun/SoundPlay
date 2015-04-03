@@ -175,7 +175,7 @@ app.factory('mydb', function(){
     };    
     request.onerror = function(e){
       //console.log(e);
-      alert("insert error occurred! oh no!: "+e);
+      alert("insert error occurred! oh no!: "+e.Event);
       console.log("insert error occurred! oh no!");
     };    
   };
