@@ -113,3 +113,139 @@ app.factory('g_sound', function(globals){
 
   return g_sound;
 });
+
+
+
+
+app.factory('mydb', function(){
+  var mydb = {};
+  mydb.db = null;
+  mydb.ready = false;
+
+  window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+  window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+  window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+  var request = indexedDB.open("soundplaydb", 6);
+  request.onerror = function(e) {
+    console.log(e);
+  };  
+  request.onupgradeneeded = function (e) {
+    console.log('database upgraded');
+    var db2 = e.target.result;
+    console.log(db2);
+    // Create an objectStore for this database
+    var objectStore = db2.createObjectStore('data', {keyPath:'keyPath'});
+  };
+  request.onsuccess = function(event) {
+    console.log('database open');
+    mydb.db = event.target.result;
+    mydb.ready = true;
+  };
+
+  mydb.insert = function(music_id, filter_type, playback_rate, spatial_x){
+    if (!mydb.ready) {
+      console.log('DB is not ready');
+      return;
+    }
+
+    var transaction = mydb.db.transaction('data', 'readwrite');
+    var objectStore = transaction.objectStore('data');
+    var object = {keyPath:music_id, filter_type:filter_type, playback_rate: playback_rate, spatial_x: spatial_x};    
+
+    console.log('inserting', object);
+
+    var request = objectStore.put(object);
+    request.onsuccess = function(e) {
+      //console.log(e);
+      console.log("inserted/updated successfully");
+    };    
+    request.onerror = function(e){
+      //console.log(e);
+      console.log("insert error occurred! oh no!");
+    };    
+  };
+
+  mydb.insert2 = function(music_id, buffer){
+    if (!mydb.ready) {
+      console.log('DB is not ready');
+      return;
+    }
+
+    var transaction = mydb.db.transaction('data', 'readwrite');
+    var objectStore = transaction.objectStore('data');
+    var object = {keyPath:music_id+"_b", buffer: buffer};    
+
+    console.log('inserting', object);
+
+    var request = objectStore.put(object);
+    request.onsuccess = function(e) {
+      //console.log(e);
+      console.log("inserted/updated successfully");
+    };    
+    request.onerror = function(e){
+      //console.log(e);
+      console.log("insert error occurred! oh no!");
+    };    
+  };
+
+  mydb.insert3 = function(music_id, buffer){
+    if (!mydb.ready) {
+      console.log('DB is not ready');
+      return;
+    }
+
+    var transaction = mydb.db.transaction('data', 'readwrite');
+    var objectStore = transaction.objectStore('data');
+    var object = {keyPath:music_id+"_c", buffer: buffer};    
+
+    console.log('inserting', object);
+
+    var request = objectStore.put(object);
+    request.onsuccess = function(e) {
+      //console.log(e);
+      console.log("inserted/updated successfully");
+    };    
+    request.onerror = function(e){
+      //console.log(e);
+      console.log("insert error occurred! oh no!");
+    };    
+  };
+
+  mydb.fetch = function(music_id){
+    if (!mydb.ready) {
+      console.log('DB is not ready');
+      return;
+    }
+
+    var transaction = mydb.db.transaction('data', 'readwrite');
+    var objectStore = transaction.objectStore('data');
+    var request = objectStore.get(music_id);
+
+    request.onsuccess = function(e) {
+      //console.log(e);
+      console.log(JSON.stringify(e.target.result));
+      //console.log(JSON.stringify(e.target.result.keyPath));
+      //return e.target.result;
+    };
+  };
+
+  mydb.remove = function(music_id){
+    if (!mydb.ready) {
+      console.log('DB is not ready');
+      return;
+    }
+    var transaction = mydb.db.transaction('data', 'readwrite');
+    var objectStore = transaction.objectStore('data');
+    var request = objectStore.delete(music_id);    
+
+    request.onsuccess = function(e) {
+      //console.log(e);
+      console.log("setting data deleted");
+    };    
+  };
+
+
+
+  return mydb;
+});

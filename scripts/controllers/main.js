@@ -8,7 +8,7 @@
  * Controller of the soundPlay
  */
 angular.module('soundPlay')
-  .controller('MainCtrl', function ($scope, globals, $location) {
+  .controller('MainCtrl', function ($scope, globals, $location, mydb) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
