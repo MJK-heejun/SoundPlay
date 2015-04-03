@@ -164,11 +164,9 @@ app.factory('mydb', function(){
       spatial_x: spatial_x
     };    
 
-var arr = [];
-
     object = {
       keyPath:"dummy", 
-      channel_data_arr: arr,
+      channel_data_arr: channel_data_arr,
       num_channel: num_channel,
       buff_length: buff_length,
       sample_rate: sample_rate,
