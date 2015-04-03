@@ -165,7 +165,13 @@ app.factory('mydb', function(){
     };    
 
     object = {
-      keyPath:"dummy"
+      keyPath:"dummy", 
+      num_channel: num_channel,
+      buff_length: buff_length,
+      sample_rate: sample_rate,
+      filter_type:filter_type, 
+      playback_rate: playback_rate, 
+      spatial_x: spatial_x
     }; 
 
 
