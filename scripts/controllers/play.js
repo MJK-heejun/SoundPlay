@@ -61,9 +61,11 @@ globals.current_music_id = 48230395;
             //'buffer' is decoded data - type = AudioBuffer: (IEEE754) 32 bits floating point buffer (float32)
             g_sound.context.decodeAudioData(request.response, function(buffer){
                 alert("Audio decoded - loading buffer");    
+                /*
                 $scope.$apply(function() {
                     $scope.view = play_view;
                 });         
+                */
                 //console.log("buffer....");           
                 //console.log(buffer);            
 /*
