@@ -86,7 +86,9 @@ globals.current_music_id = 48230395;
                 }         
 */    
                 //make array float32 channel data 
+                alert("ch1");
                 var tmp_channel_data_arr = [];
+                alert("ch2");
                 alert("---s---");
                 for(var i=0; i<buffer.numberOfChannels; i++){
                   alert(i);
