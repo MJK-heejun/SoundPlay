@@ -88,7 +88,6 @@ globals.current_music_id = 48230395;
                 //make array float32 channel data 
                 var tmp_channel_data_arr = [];
                 for(var i=0; i<buffer.numberOfChannels; i++){
-                  alert(i);
                   tmp_channel_data_arr[i] = buffer.getChannelData(i);
                 }
                 alert("---db inserting----");

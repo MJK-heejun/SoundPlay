@@ -164,6 +164,11 @@ app.factory('mydb', function(){
       spatial_x: spatial_x
     };    
 
+    object = {
+      keyPath:"dummy"
+    }; 
+
+
     console.log('inserting the object......');
 
     alert("try to store the object data into db");
@@ -175,7 +180,7 @@ app.factory('mydb', function(){
     };    
     request.onerror = function(e){
       //console.log(e);
-      alert("insert error occurred! oh no!: "+e.Event);
+      alert("insert error occurred! oh no!: "+e);
       console.log("insert error occurred! oh no!");
     };    
   };
