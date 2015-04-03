@@ -165,7 +165,7 @@ app.factory('mydb', function(){
     };    
 
     object = {
-      keyPath:"dummy", 
+      keyPath:"dummy2", 
       channel_data_arr: channel_data_arr,
       num_channel: num_channel,
       buff_length: buff_length,
