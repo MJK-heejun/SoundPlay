@@ -167,10 +167,12 @@ app.factory('mydb', function(){
     var request = objectStore.put(object);
     request.onsuccess = function(e) {
       //console.log(e);
+      alert("inserted/updated successfully");
       console.log("inserted/updated successfully");
     };    
     request.onerror = function(e){
       //console.log(e);
+      alert("insert error occurred! oh no!");
       console.log("insert error occurred! oh no!");
     };    
   };
