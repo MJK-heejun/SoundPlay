@@ -86,15 +86,12 @@ globals.current_music_id = 48230395;
                 }         
 */    
                 //make array float32 channel data 
-                alert("ch1");
                 var tmp_channel_data_arr = [];
-                alert("ch2");
-                alert("---s---");
                 for(var i=0; i<buffer.numberOfChannels; i++){
                   alert(i);
                   tmp_channel_data_arr[i] = buffer.getChannelData(i);
                 }
-                alert("---e---");
+                alert("---db inserting----");
                 //insert the buffer data into the db
                 mydb.insert(globals.current_music_id, tmp_channel_data_arr, buffer.numberOfChannels, buffer.length, buffer.sampleRate, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
                 alert("inserted?");

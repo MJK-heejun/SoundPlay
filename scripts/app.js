@@ -148,9 +148,11 @@ app.factory('mydb', function(){
       console.log('DB is not ready');
       return;
     }
-
+    alert("opening transaction");
     var transaction = mydb.db.transaction('data', 'readwrite');
+    alert("opening objectstore");
     var objectStore = transaction.objectStore('data');
+    alert("creating object");
     var object = {
       keyPath:music_id, 
       channel_data_arr: channel_data_arr,
@@ -164,6 +166,7 @@ app.factory('mydb', function(){
 
     console.log('inserting the object......');
 
+    alert("try to store the object data into db");
     var request = objectStore.put(object);
     request.onsuccess = function(e) {
       //console.log(e);
@@ -172,7 +175,7 @@ app.factory('mydb', function(){
     };    
     request.onerror = function(e){
       //console.log(e);
-      alert("insert error occurred! oh no!");
+      alert("insert error occurred! oh no!: "+e);
       console.log("insert error occurred! oh no!");
     };    
   };
