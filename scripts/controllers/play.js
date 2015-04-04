@@ -19,6 +19,7 @@ angular.module('soundPlay')
     $scope.playback_rate = 1;
     $scope.spatial_x = 0;
     $scope.filter_type = "none";
+
     
     //listen for accelerometer
     window.addEventListener('deviceorientation', handleOrientation);
@@ -36,7 +37,7 @@ globals.current_music_id = 48230395;
     //fetch from db
     if (!mydb.ready) {
       console.log('DB is not ready: play.js');
-      $location.path('/main');
+      //$location.path('/main');
       return;
     }    
     
@@ -47,63 +48,50 @@ globals.current_music_id = 48230395;
     
     db_request.onsuccess = function(e) {
       var saved_data = e.target.result;
+
+      $('.loading-msg').text("loading by XMLHttpRequest");
+
+      //loading previously saved setting
       if(saved_data === undefined){
-        console.log("loading by XMLHttpRequest");
-
-        var request = new XMLHttpRequest();
-          var url = "http://api.soundcloud.com/tracks/48230395/stream?client_id=22a6f6d4d6138acff711c666f09a62c7";
-        request.open("GET", url, true);
-        request.responseType = "arraybuffer";
-        alert("making Http Request");
-        request.onload = function(){
-            alert("decoding audio");
-            //'request.response' is arraybuffer
-            //'buffer' is decoded data - type = AudioBuffer: (IEEE754) 32 bits floating point buffer (float32)
-            g_sound.context.decodeAudioData(request.response, function(buffer){
-                alert("Audio decoded - loading buffer");    
-
-                //insert the buffer data into the db
-                mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
-
-                g_sound.mySoundBuffer = buffer;                      
-                //g_sound.mySoundBuffer = yoink;                      
-
-                g_sound.isPaused = false;
-                $scope.play();            
-            }, onError);
-        };
-        request.send();
       }else{
-        alert('previous setting retrieved for the music');
         console.log('previous setting retrieved for the music');  
-
-        $scope.$apply(function() {
-            $scope.view = play_view;
-        });  
-
-        //retrieve saved buffer data
-        var channel_data_arr = saved_data['channel_data_arr'];
-        var num_channel = saved_data['num_channel'];
-        var buff_length = saved_data['buff_length'];
-        var sample_rate = saved_data['sample_rate'];
 
         //set default values
         $scope.playback_rate = saved_data['playback_rate'];
         $scope.spatial_x = saved_data['spatial_x'];
         $scope.filter_type = saved_data['filter_type'];
-
-        g_sound.mySoundBuffer = tmp_buffer;       
-        g_sound.isPaused = false;
-        $scope.play();  
       }
+
+
+      var request = new XMLHttpRequest();
+      //var url = 'http://api.soundcloud.com/tracks/'+globals.current_music_id+'/stream?client_id='+globals.client_id; 
+        var url = "http://api.soundcloud.com/tracks/48230395/stream?client_id=22a6f6d4d6138acff711c666f09a62c7";
+      request.open("GET", url, true);
+      request.responseType = "arraybuffer";
+      $('.loading-msg').text("making Http Request");
+      request.onload = function(){
+          $('.loading-msg').text("decoding audio");
+          //'request.response' is arraybuffer
+          //'buffer' is decoded data - type = AudioBuffer: (IEEE754) 32 bits floating point buffer (float32)
+          g_sound.context.decodeAudioData(request.response, function(buffer){
+              $('.loading-msg').text("Audio decoded - loading buffer");
+
+              //insert the buffer data into the db
+              mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
+
+              g_sound.mySoundBuffer = buffer;                      
+              //g_sound.mySoundBuffer = yoink;                      
+
+              g_sound.isPaused = false;
+              $scope.play();            
+
+              $scope.$apply(function() {
+                  $scope.view = play_view;
+              });                
+          }, onError);
+      };
+      request.send();
     }
-
-
-
-    console.log(globals.current_music_id);
-
-    //var url = 'http://api.soundcloud.com/tracks/'+globals.current_music_id+'/stream?client_id='+globals.client_id; 
-
 
 
 
