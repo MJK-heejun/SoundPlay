@@ -148,11 +148,8 @@ app.factory('mydb', function(){
       console.log('DB is not ready');
       return;
     }
-    alert("opening transaction");
     var transaction = mydb.db.transaction('data', 'readwrite');
-    alert("opening objectstore");
     var objectStore = transaction.objectStore('data');
-    alert("creating object");
     var object = {
       keyPath:music_id, 
       channel_data_arr: channel_data_arr,
@@ -164,21 +161,9 @@ app.factory('mydb', function(){
       spatial_x: spatial_x
     };    
 
-    object = {
-      keyPath:"dummy2", 
-      channel_data_arr: channel_data_arr,
-      num_channel: num_channel,
-      buff_length: buff_length,
-      sample_rate: sample_rate,
-      filter_type:filter_type, 
-      playback_rate: playback_rate, 
-      spatial_x: spatial_x
-    }; 
-
-
     console.log('inserting the object......');
 
-    alert("try to store the object data into db");
+    //alert("try to store the object data into db");
     var request = objectStore.put(object);
     request.onsuccess = function(e) {
       //console.log(e);

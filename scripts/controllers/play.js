@@ -90,6 +90,8 @@ globals.current_music_id = 48230395;
                 for(var i=0; i<buffer.numberOfChannels; i++){
                   tmp_channel_data_arr[i] = buffer.getChannelData(i);
                 }
+                console.log(tmp_channel_data_arr[0].length);
+
                 alert("---db inserting----");
                 //insert the buffer data into the db
                 mydb.insert(globals.current_music_id, tmp_channel_data_arr, buffer.numberOfChannels, buffer.length, buffer.sampleRate, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
