@@ -61,48 +61,9 @@ globals.current_music_id = 48230395;
             //'buffer' is decoded data - type = AudioBuffer: (IEEE754) 32 bits floating point buffer (float32)
             g_sound.context.decodeAudioData(request.response, function(buffer){
                 alert("Audio decoded - loading buffer");    
-                /*
-                $scope.$apply(function() {
-                    $scope.view = play_view;
-                });         
-                */
-                //console.log("buffer....");           
-                //console.log(buffer);            
-/*
-                var one = buffer.getChannelData(0);
-                var two = buffer.getChannelData(1);
 
-                var yoink = g_sound.context.createBuffer(2, buffer.length, buffer.sampleRate);
-                console.log(yoink);
-                
-                var one_y = yoink.getChannelData(0);
-                var two_y = yoink.getChannelData(1);
-
-                for ( var n = 0; n < one.length; n++ ) {
-                  one_y[n] = one[n];
-                }         
-                for ( var n = 0; n < two.length; n++ ) {
-                  two_y[n] = two[n];
-                }         
-*/    
-                //make array float32 channel data 
-                var tmp_channel_data_arr = [];
-                for(var i=0; i<buffer.numberOfChannels; i++){
-                  tmp_channel_data_arr[i] = buffer.getChannelData(i);
-                }
-                console.log(tmp_channel_data_arr[0].length);
-
-                alert("---db inserting----");
                 //insert the buffer data into the db
-                mydb.insert(globals.current_music_id, tmp_channel_data_arr, buffer.numberOfChannels, buffer.length, buffer.sampleRate, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
-                alert("inserted?");
-                //console.log("buffer....");           
-                //globals.current_music_id = 48230395;
-                //mydb.insert2(globals.current_music_id, one);
-                //mydb.insert2(globals.current_music_id, buffer);
-                //mydb.insert3(48230395, two);
-                //console.log(mydb.fetch(globals.current_music_id+"_b"));
-                //console.log("inserted?");         
+                mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
 
                 g_sound.mySoundBuffer = buffer;                      
                 //g_sound.mySoundBuffer = yoink;                      
@@ -125,44 +86,15 @@ globals.current_music_id = 48230395;
         var num_channel = saved_data['num_channel'];
         var buff_length = saved_data['buff_length'];
         var sample_rate = saved_data['sample_rate'];
-        //recombine the scattered data into AudioBuffer
-        var tmp_buffer = g_sound.context.createBuffer(num_channel, buff_length, sample_rate);
-        var tmp_channel_data_arr = [];
-        //pointer mapping
-        for(var i=0; i<num_channel; i++){
-          tmp_channel_data_arr[i] = tmp_buffer.getChannelData(i);
-        }
-        //copying channel data to tmp buffer channel data
-        for(var i=0; i<num_channel; i++){
-          var channel_length = channel_data_arr[i].length;
-          for(var j=0; j < channel_length; j++){
-            tmp_channel_data_arr[i][j] = channel_data_arr[i][j];
-          }
-        }
+
+        //set default values
+        $scope.playback_rate = saved_data['playback_rate'];
+        $scope.spatial_x = saved_data['spatial_x'];
+        $scope.filter_type = saved_data['filter_type'];
+
         g_sound.mySoundBuffer = tmp_buffer;       
         g_sound.isPaused = false;
         $scope.play();  
-/*
-                var one = buffer.getChannelData(0);
-                var two = buffer.getChannelData(1);
-
-                var yoink = g_sound.context.createBuffer(2, buffer.length, buffer.sampleRate);
-                console.log(yoink);
-                
-                var one_y = yoink.getChannelData(0);
-                var two_y = yoink.getChannelData(1);
-
-                for ( var n = 0; n < one.length; n++ ) {
-                  one_y[n] = one[n];
-                }         
-                for ( var n = 0; n < two.length; n++ ) {
-                  two_y[n] = two[n];
-                }         
-
-        //console.log("channel_data_arr is retrieved!!!");
-        //console.log(channel_data_arr.length);                
-*/
-
       }
     }
 

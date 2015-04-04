@@ -143,7 +143,7 @@ app.factory('mydb', function(){
     mydb.ready = true;
   };
 
-  mydb.insert = function(music_id, channel_data_arr, num_channel, buff_length, sample_rate, filter_type, playback_rate, spatial_x){
+  mydb.insert = function(music_id, filter_type, playback_rate, spatial_x){
     if (!mydb.ready) {
       console.log('DB is not ready');
       return;
@@ -152,10 +152,6 @@ app.factory('mydb', function(){
     var objectStore = transaction.objectStore('data');
     var object = {
       keyPath:music_id, 
-      channel_data_arr: channel_data_arr,
-      num_channel: num_channel,
-      buff_length: buff_length,
-      sample_rate: sample_rate,
       filter_type:filter_type, 
       playback_rate: playback_rate, 
       spatial_x: spatial_x
@@ -176,53 +172,7 @@ app.factory('mydb', function(){
       console.log("insert error occurred! oh no!");
     };    
   };
-/*
-  mydb.insert2 = function(music_id, buffer){
-    if (!mydb.ready) {
-      console.log('DB is not ready');
-      return;
-    }
 
-    var transaction = mydb.db.transaction('data', 'readwrite');
-    var objectStore = transaction.objectStore('data');
-    var object = {keyPath:music_id+"_b", buffer: buffer};    
-
-    console.log('inserting', object);
-
-    var request = objectStore.put(object);
-    request.onsuccess = function(e) {
-      //console.log(e);
-      console.log("inserted/updated successfully");
-    };    
-    request.onerror = function(e){
-      //console.log(e);
-      console.log("insert error occurred! oh no!");
-    };    
-  };
-
-  mydb.insert3 = function(music_id, buffer){
-    if (!mydb.ready) {
-      console.log('DB is not ready');
-      return;
-    }
-
-    var transaction = mydb.db.transaction('data', 'readwrite');
-    var objectStore = transaction.objectStore('data');
-    var object = {keyPath:music_id+"_c", buffer: buffer};    
-
-    console.log('inserting', object);
-
-    var request = objectStore.put(object);
-    request.onsuccess = function(e) {
-      //console.log(e);
-      console.log("inserted/updated successfully");
-    };    
-    request.onerror = function(e){
-      //console.log(e);
-      console.log("insert error occurred! oh no!");
-    };    
-  };
-*/
   mydb.fetch = function(music_id){
     if (!mydb.ready) {
       console.log('DB is not ready');
