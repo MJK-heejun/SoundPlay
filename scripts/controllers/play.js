@@ -25,7 +25,7 @@ angular.module('soundPlay')
     $scope.is_geolocation_enabled = false;
 
     //Available selection for up/down action in filter,play views
-    $scope.filter_view_selection_arr = ["none", "lowpass", "highpass", "bandpass"];
+    $scope.filter_view_selection_arr = ["select filters", "lowpass", "highpass", "bandpass"];
     /*
     $scope.play_view_selection_up = "Pause";
     $scope.play_view_selection_center = "Play";

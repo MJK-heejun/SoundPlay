@@ -43,8 +43,6 @@
 }
 
 
-
-
 input[type=range]{
     -webkit-appearance: none;
 }
@@ -52,7 +50,7 @@ input[type=range]{
 input[type=range]::-webkit-slider-runnable-track {
     width: 300px;
     height: 10px;
-    background: #ddd;
+    background: #777777;
     border: none;
     border-radius: 3px;
 }
@@ -72,7 +70,7 @@ input[type=range]:focus {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
+    background: #777777;
 }
 
 
@@ -80,8 +78,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   width: 50%;
   height: 200px;
 
-  top: 20%;
-  left: 25%;
+/*  top: 70%;
+  left: 70%;*/
 
   -webkit-border-radius: 84px;
   -moz-border-radius: 84px;
@@ -96,7 +94,72 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 .spinner-container img{
-  margin-left: auto;
-  margin-right: auto;
+/*  margin-left: 50%;
+  margin-right: 50%;*/
   width: 20%;
+}
+
+.loading-msg {
+  text-align: center;
+}
+
+
+
+/*------------------------------ocean'styling starting from here------------------------------------------------*/
+/* question1: what is spinner- container*/
+
+
+
+/*homepage styling*/
+html { 
+    background: url(images/bg.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+    
+
+body {
+    /*background-image: url("images/background.png");*/
+    /*background-color: #ddd;*/
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 10%;
+  margin-top: 15%;
+
+}
+
+.appName{
+  text-align: center;
+  font-size: 70pt;
+  color: #F77D0F;
+}
+
+
+
+/*----------------------------play page styling----------------------------------------------------------*/
+.filter{
+  margin-top: 15%;
+  margin-bottom: 15%;
+}
+
+.play{
+  text-align: center;
+}
+
+.stop{
+  text-align: center;
+}
+
+.save{
+  /*display: inline;*/
+    text-align: center;
+}
+
+.reset{
+  /*display: inline;*/
+    text-align: center;
 }
