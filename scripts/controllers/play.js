@@ -191,8 +191,8 @@ globals.current_music_id = 48230395;
 
       //pannerSetPos($scope.spatial_x, g_sound.yPos, g_sound.zPos);
 
-      //$('#gamma').text(gamma);
-      //$('#xPos').text($scope.spatial_x);      
+      $('#gamma').text(gamma);
+      $('#xPos').text($scope.spatial_x);      
     }
 /*
     function resetPanner(){
