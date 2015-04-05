@@ -160,11 +160,13 @@ app.factory('mydb', function(){
     var request = objectStore.put(object);
     request.onsuccess = function(e) {
       //console.log(e);
+      swal("Setting Saved", "", "success");
       console.log("inserted/updated successfully");
     };    
     request.onerror = function(e){
       //console.log(e);
       console.log("insert error occurred! oh no!:"+e);
+      swal("error", "", "error");
     };    
   };
 
@@ -198,7 +200,7 @@ app.factory('mydb', function(){
     request.onsuccess = function(e) {
       //console.log(e);
       console.log("setting data deleted");
-      alert("setting data deleted");
+      swal("Reset Successful", "", "success");
     };    
   };
 
