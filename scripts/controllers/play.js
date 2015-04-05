@@ -18,7 +18,7 @@ angular.module('soundPlay')
     //set default values
     $scope.playback_rate = 1;
     $scope.spatial_x = 0;
-    $scope.filter_type = "none";
+    $scope.filter_type = "select filters";
     
     //view enabler flag
     $scope.is_accelerometer_enabled = false;
@@ -120,7 +120,7 @@ globals.current_music_id = 48230395;
 
 
         //connect/disconnect filter node depending on the setting
-        if($scope.filter_type == "none"){
+        if($scope.filter_type == "select filters"){
           g_sound.source.connect(g_sound.panner);
           g_sound.panner.connect(g_sound.context.destination);
         }else{        
