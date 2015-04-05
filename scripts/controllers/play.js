@@ -361,8 +361,8 @@ globals.current_music_id = 48230395;
 
 
     function filterChange(){
-      if($scope.filter_view_selection_arr[$scope.f_v_s_p_index] != 'none'){
-        if($scope.filter_type == 'none'){
+      if($scope.filter_view_selection_arr[$scope.f_v_s_p_index] != 'select filters'){
+        if($scope.filter_type == 'select filters'){
           //disconnect all node
           disconnectAllNode();
           //connect the nodes again without filter node
