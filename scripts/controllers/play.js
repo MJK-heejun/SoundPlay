@@ -172,9 +172,6 @@ globals.current_music_id = 48230395;
                 {latitude: cur_lat, longitude: cur_long}
               );
 
-
-              meter_per_sec = 8;
-
               //debugging to convert string to float
               $scope.playback_rate = parseFloat($scope.playback_rate);
 
@@ -210,6 +207,13 @@ globals.current_music_id = 48230395;
 
               $scope.$apply(function() {
               }); 
+
+              $('#p_lat').text("prev lat:"+prev_lat);
+              $('#p_long').text("prev long:"+prev_long);
+              $('#c_lat').text("cur lat:"+cur_lat);
+              $('#c_long').text("cur long:"+cur_long);
+              $('#mps').text(meter_per_sec+"mps");
+
 
               //set prev as curret
               prev_lat = cur_lat;
