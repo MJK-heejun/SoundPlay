@@ -79,8 +79,10 @@
 		LA
 	</div>
 	<div class="col-xs-8 tac">
+		<p>Playback Rate</p>
+		Use GPS speed detector
+		<input type="checkbox" ng-model='is_geolocation_enabled' />		
 		<form>
-			playback rate
 			<input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
 		</form>	
 	</div>

@@ -22,6 +22,7 @@ angular.module('soundPlay')
     
     //view enabler flag
     $scope.is_accelerometer_enabled = false;
+    $scope.is_geolocation_enabled = false;
 
     //Available selection for up/down action in filter,play views
     $scope.filter_view_selection_arr = ["none", "lowpass", "highpass", "bandpass"];
@@ -147,6 +148,85 @@ globals.current_music_id = 48230395;
       console.log("spatial_x: "+$scope.spatial_x);
       g_sound.panner.setPosition(parseFloat($scope.spatial_x), 0, 298);      
     }, true);
+
+
+    //geolocation enabler change
+    var geolocation_interval;
+    var prev_lat, prev_long;
+    $scope.$watch('is_geolocation_enabled', function(){      
+      if($scope.is_geolocation_enabled){
+        if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(function(position){
+            prev_lat = position.coords.latitude;
+            prev_long = position.coords.longitude;
+          });
+
+          geolocation_interval = setInterval(function(){
+            var cur_lat;
+            var cur_long;
+            navigator.geolocation.getCurrentPosition(function(position){
+              cur_lat = position.coords.latitude;
+              cur_long = position.coords.longitude;
+              var meter_per_sec = geolib.getDistance(
+                {latitude: prev_lat, longitude: prev_long},
+                {latitude: cur_lat, longitude: cur_long}
+              );
+
+
+              meter_per_sec = 8;
+
+              //debugging to convert string to float
+              $scope.playback_rate = parseFloat($scope.playback_rate);
+
+              //normal car speed = 50 kmh = 13.8889 meter per sec
+              // => playback-rate speed up to 3x
+              if(meter_per_sec > 13.8889 && $scope.playback_rate <= 3){
+                $scope.playback_rate += 0.1;
+              //normal cycling speed = 5.81152 meter per sec
+              // => playback-rate speed up to 2x
+              }else if(meter_per_sec > 5.81152){
+                if($scope.playback_rate < 2)
+                  $scope.playback_rate += 0.1;
+                else
+                  $scope.playback_rate -= 0.1;
+              //man jogging speed = 3.71043 meter per sec
+              // => playback-rate speed up to 1.5x              
+              }else if(meter_per_sec > 3.71043){
+                if($scope.playback_rate < 1.5)
+                  $scope.playback_rate += 0.1;
+                else
+                  $scope.playback_rate -= 0.1;
+              //man walking speed = 1.38582 meter per sec
+              // => playback-rate speed up to 1.3x              
+              }else if(meter_per_sec > 1.3852){
+                if($scope.playback_rate < 1.3)
+                  $scope.playback_rate += 0.1;
+                else
+                  $scope.playback_rate -= 0.1;
+              //reduce playback rate gradually when slower than walking speed
+              }else if(meter_per_sec < 1.3852 && $scope.playback_rate > 1){
+                $scope.playback_rate -= 0.1;
+              }
+
+              $scope.$apply(function() {
+              }); 
+
+              //set prev as curret
+              prev_lat = cur_lat;
+              prev_long = cur_long;             
+            });        
+          }, 1000);            
+        }else{
+          alert("Geolocation service is not supported by this browser");
+        }
+      }else{
+        try{
+          clearInterval(geolocation_interval);
+        }catch(e){
+          console.log(e);
+        }      
+      }
+    });    
 
     //playback rate change
     $scope.$watch('playback_rate', function(){      
