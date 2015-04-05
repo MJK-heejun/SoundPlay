@@ -172,6 +172,9 @@ globals.current_music_id = 48230395;
     //accelerometer event function
     function handleOrientation(event) {
       // Do stuff with the new orientation data
+      alert("yes my lord?");
+      $('#ttt').text('ttt initiated');
+
       var absolute = event.absolute;
       var alpha    = event.alpha;
       var beta     = event.beta;
@@ -192,7 +195,7 @@ globals.current_music_id = 48230395;
       //pannerSetPos($scope.spatial_x, g_sound.yPos, g_sound.zPos);
 
       $('#gamma').text(gamma);
-      $('#xPos').text($scope.spatial_x);      
+      $('#xPos').text($scope.spatial_x);        
     }
 /*
     function resetPanner(){
