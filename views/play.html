@@ -1,14 +1,25 @@
-
 <div ng-show="view=='0'">
 	<!-- loading view -->
-	<div class="margin-lr-auto" style="width:50%; height: 50px;">
-		<div class="whirly">
-			spinner
+	<div class="margin-lr-auto loadPosition row">
+		<div class="loader col-xs-12">
+			<div class="loader-inner ball-pulse-sync">
+			    <div></div>
+			    <div></div>
+			    <div></div>
+			</div>
 		</div>		
 	</div>
 	<div class="loading-msg">spinner</div>
-
 </div>
+
+<!-- <div ng-show="view=='0'" class="loader loaderPost">
+
+
+    <div class="loading-msg">spinner</div>
+</div> -->
+
+
+
 <!--
 <div ng-show="view=='1'">
 	<div class="row">
@@ -38,7 +49,7 @@
 		<div class="row uparrow">
 			<div class="col-xs-4 tac"><p></p></div>
 			<div class="col-xs-8 tac" ng-click="upDownArrowAction('u')">     <!-- border-b -->
-				<p class="arrow2 top">at </p> 
+				<p class="arrow2 top"> </p> 
 			</div>
 			<div class="col-xs-4 tac"><p></p></div>
 		</div>
@@ -72,7 +83,7 @@
 		<div class="row downarrow">
 			<div class="col-xs-4 tac"><p></p></div>
 			<div class="col-xs-8 tac" ng-click="upDownArrowAction('d')">
-				<p class="arrow2 down"> ad</p>
+				<p class="arrow2 down"></p>
 			</div>
 			<div class="col-xs-4 tac"><p></p></div>
 		</div>
