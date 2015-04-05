@@ -11,7 +11,6 @@
 angular
   .module('soundPlay', [
     'ngAnimate',
-    'ngMessages',
     'ngRoute',
     'ngSanitize',
     'ngTouch'
