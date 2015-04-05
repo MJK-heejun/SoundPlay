@@ -1,6 +1,7 @@
 
 
 <div ng-show="view=='0'">
+	<!-- loading view -->
 	<div class="margin-lr-auto" style="width:50%; height: 50px;">
 		<div class="whirly">
 			spinner
@@ -10,9 +11,62 @@
 
 </div>
 <div ng-show="view=='1'">
-	play view
+	<!-- play view -->
+	<div class="col-xs-2" ng-click="changeView('l')">
+		LA
+	</div>
+	<div class="col-xs-8 tac">
+		Play View
+	</div>
+	<div class="col-xs-2" ng-click="changeView('r')">
+		RA
+	</div>		
 </div>
-
+<div ng-show="view==2">
+	<!-- filter view -->
+	<div class="col-xs-2" ng-click="changeView('l')">
+		LA
+	</div>
+	<div class="col-xs-8 tac">
+		Filter View
+	</div>
+	<div class="col-xs-2" ng-click="changeView('r')">
+		RA
+	</div>	
+</div>
+<div ng-show="view==3">
+	<!-- spatial sound view -->
+	<div class="row">
+		<div class="col-xs-2" ng-click="changeView('l')">
+			LA
+		</div>
+		<div class="col-xs-8 tac">
+			Use accelerometer 
+			<input type="checkbox" ng-model='is_accelerometer_enabled' />
+			<form>
+				<input id="accel_range" type="range" ng-model="spatial_x" min="-10" max="10" step="0.1" value="0" >			
+			</form>
+		</div>
+		<div class="col-xs-2" ng-click="changeView('r')">
+			RA
+		</div>		
+	</div>
+</div>
+<div ng-show="view==4">
+	<!-- playback rate view -->
+	<div class="col-xs-2" ng-click="changeView('l')">
+		LA
+	</div>
+	<div class="col-xs-8 tac">
+		<form>
+			playback rate
+			<input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
+		</form>	
+	</div>
+	<div class="col-xs-2" ng-click="changeView('r')">
+		RA
+	</div>	
+</div>
 
 
 
@@ -29,28 +83,8 @@
 	lowFilter
 </div>
 
-Use accelerometer 
-<input type="checkbox" ng-model='is_accelerometer_enabled' />
-<form>
-fsdg
-	<input id="accel_range" type="range" ng-model="spatial_x" min="-10" max="10" step="0.1" value="0" >			
-</form>
 
 
-<form>
-	playback rate
-  <input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
-</form>
-
-<div id="gamma">
-	print gamma
-</div>
-<div id="xPos">
-	print xPos
-</div>
-<div id="acc">
-	yo ttt
-	</div>
 <br/><br/><br/><br/>
 <div id="reset">
 	reset everything

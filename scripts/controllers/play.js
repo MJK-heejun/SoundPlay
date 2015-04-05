@@ -163,7 +163,16 @@ globals.current_music_id = 48230395;
     };
 
 
-
+    $scope.changeView = function(arrow_clicked){
+      if(arrow_clicked == 'r'){
+        $scope.view = $scope.view % 4 + 1;        
+      }else if(arrow_clicked == 'l'){
+        if($scope.view == 1)
+          $scope.view = 4;
+        else
+          $scope.view -= 1;
+      }
+    }; 
 /*
     $scope.lowFilter = function(){
       
@@ -192,17 +201,12 @@ globals.current_music_id = 48230395;
       g_sound.panner.setPosition(parseFloat($scope.spatial_x), 0, 298);
 
       //pannerSetPos($scope.spatial_x, g_sound.yPos, g_sound.zPos);
-
+      /*
       $('#gamma').text(gamma);
       $('#xPos').text($scope.spatial_x);        
       $('#acc').text($scope.is_accelerometer_enabled);        
-      
+      */
     }
-/*
-    function resetPanner(){
-      $scope.spatial_x = 0;    
-    }
-*/
 
     $('#reset').click(function(){
       mydb.remove(globals.current_music_id);
