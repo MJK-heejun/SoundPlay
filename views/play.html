@@ -12,14 +12,34 @@
 </div>
 <div ng-show="view=='1'">
 	<!-- play view -->
+	<div class="row">
+		<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
+			UA
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-xs-12 tac">
+			{{play_view_selection_arr[p_v_s_p_index]}}
+		</div>
+	</div>		
 	<div class="col-xs-2" ng-click="changeView('l')">
 		LA
 	</div>
 	<div class="col-xs-8 tac">
-		Play View
+		{{play_view_selection_arr[p_v_s_c_index]}}
 	</div>
 	<div class="col-xs-2" ng-click="changeView('r')">
 		RA
+	</div>		
+	<div class="row">
+		<div class="col-xs-12 tac">
+			{{play_view_selection_arr[p_v_s_n_index]}}
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
+			DA
+		</div>
 	</div>		
 </div>
 <div ng-show="view==2">
@@ -93,33 +113,10 @@
 
 
 
-<div ng-click="play()">
-	play
-</div>
-<div ng-click="pause()">
-	pause
-</div>
-<div ng-click="stop()">
-	stop
-</div>
-
-<div id="p_lat">
-	lat
-</div>
-<div id="p_long">
-	long
-</div>
-<div id="c_lat">
-	lat
-</div>
-<div id="c_long">
-	long
-</div>
-<div id="mps">
-	mps
-</div>
-
 <br/><br/><br/><br/>
-<div id="reset">
-	reset everything
+<div ng-show="view!='0'" ng-click="saveDb()">
+	Save the setting
+</div>
+<div ng-show="view!='0'" ng-click="resetDb()">
+	Reset the setting
 </div>

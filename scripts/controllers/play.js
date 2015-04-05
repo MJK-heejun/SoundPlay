@@ -52,7 +52,7 @@ globals.current_music_id = 48230395;
     //fetch from db
     if (!mydb.ready) {
       console.log('DB is not ready: play.js');
-      //$location.path('/main');
+      $location.path('/main');
       return;
     }    
     
@@ -92,7 +92,7 @@ globals.current_music_id = 48230395;
               $('.loading-msg').text("Audio decoded - loading buffer");
 
               //insert the buffer data into the db
-              mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
+              //mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
 
               g_sound.mySoundBuffer = buffer;                      
               //g_sound.mySoundBuffer = yoink;                      
@@ -120,6 +120,10 @@ globals.current_music_id = 48230395;
       // tell the source which sound to play
       g_sound.source.buffer = g_sound.mySoundBuffer;  
 
+      //setting playback rate
+      g_sound.source.playbackRate.value = $scope.playback_rate;
+
+
       //connect/disconnect filter node depending on the setting
       if($scope.filter_type == "none"){
         g_sound.source.connect(g_sound.panner);
@@ -127,7 +131,7 @@ globals.current_music_id = 48230395;
       }else{        
         g_sound.source.connect(g_sound.filter);
         g_sound.filter.connect(g_sound.panner);        
-        g_sound.filter.connect(g_sound.context.destination);
+        g_sound.panner.connect(g_sound.context.destination);
         g_sound.filter.type = $scope.filter_type;
       }
 
@@ -205,22 +209,12 @@ globals.current_music_id = 48230395;
                 $scope.playback_rate -= 0.1;
               }
 
-              $scope.$apply(function() {
-              }); 
-
-              $('#p_lat').text("prev lat:"+prev_lat);
-              $('#p_long').text("prev long:"+prev_long);
-              $('#c_lat').text("cur lat:"+cur_lat);
-              $('#c_long').text("cur long:"+cur_long);
-              if(meter_per_sec != 0){
-                $('#mps').text(meter_per_sec+"mps");  
-              }
-              
-
-
               //set prev as curret
               prev_lat = cur_lat;
               prev_long = cur_long;             
+
+              $scope.$apply(function() {
+              });               
             });        
           }, 1000);            
         }else{
@@ -250,6 +244,14 @@ globals.current_music_id = 48230395;
     $scope.$watch('parent.view', function(newval, oldval){     
       console.log(newval+" "+oldval);      
     }, true); 
+
+    //save/reset setting into indexedb
+    $scope.saveDb = function(){
+      mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
+    };
+    $scope.resetDb = function(){
+      mydb.remove(globals.current_music_id);
+    };
 
 
     $scope.pause = function(){
@@ -283,10 +285,22 @@ globals.current_music_id = 48230395;
       switch($scope.view){
         case play_view:          
           if(arrow_clicked == 'u'){
-
+            $scope.p_v_s_p_index = $scope.p_v_s_p_index-1 < 0 ? $scope.play_view_selection_arr.length - 1 : $scope.p_v_s_p_index-1;
+            $scope.p_v_s_c_index = $scope.p_v_s_c_index-1 < 0 ? $scope.play_view_selection_arr.length - 1 : $scope.p_v_s_c_index-1;
+            $scope.p_v_s_n_index = $scope.p_v_s_n_index-1 < 0 ? $scope.play_view_selection_arr.length - 1 : $scope.p_v_s_n_index-1;            
           }else if(arrow_clicked == 'd'){
-
+            $scope.p_v_s_p_index = $scope.p_v_s_p_index+1 >= $scope.play_view_selection_arr.length ? 0 : $scope.p_v_s_p_index+1;
+            $scope.p_v_s_c_index = $scope.p_v_s_c_index+1 >= $scope.play_view_selection_arr.length ? 0 : $scope.p_v_s_c_index+1;
+            $scope.p_v_s_n_index = $scope.p_v_s_n_index+1 >= $scope.play_view_selection_arr.length ? 0 : $scope.p_v_s_n_index+1;            
           }
+
+          if($scope.play_view_selection_arr[$scope.p_v_s_c_index] == 'Play')
+            $scope.play();
+          else if($scope.play_view_selection_arr[$scope.p_v_s_c_index] == 'Pause')
+            $scope.pause();
+          else
+            $scope.stop();
+
         break;
         case filter_view:
           //index update
@@ -307,12 +321,6 @@ globals.current_music_id = 48230395;
       }
     };
 
-/*
-    $scope.lowFilter = function(){
-      
-    };
-*/
-
     function filterChange(){
       if($scope.filter_view_selection_arr[$scope.f_v_s_p_index] != 'none'){
         if($scope.filter_type == 'none'){
@@ -331,7 +339,7 @@ globals.current_music_id = 48230395;
         //connect all nodes together, including the filter node
         g_sound.source.connect(g_sound.filter);
         g_sound.filter.connect(g_sound.panner);        
-        g_sound.filter.connect(g_sound.context.destination);
+        g_sound.panner.connect(g_sound.context.destination);
 
         //update the filter type
         g_sound.filter.type = $scope.filter_type;
@@ -367,16 +375,7 @@ globals.current_music_id = 48230395;
 
       g_sound.panner.setPosition(parseFloat($scope.spatial_x), 0, 298);
 
-      //pannerSetPos($scope.spatial_x, g_sound.yPos, g_sound.zPos);
-      /*
-      $('#gamma').text(gamma);
-      $('#xPos').text($scope.spatial_x);        
-      $('#acc').text($scope.is_accelerometer_enabled);        
-      */
     }
 
-    $('#reset').click(function(){
-      mydb.remove(globals.current_music_id);
-    });
 
 });
