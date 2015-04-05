@@ -63,8 +63,8 @@ app.factory('g_sound', function(globals){
   g_sound.panner = g_sound.context.createPanner();
   g_sound.listener = g_sound.context.listener;
   g_sound.listener.setPosition(0, 0, 300);
-
-
+  //filter context
+  g_sound.filter = g_sound.context.createBiquadFilter();  
 
   //g_sound.audio = new Audio();
   g_sound.source;

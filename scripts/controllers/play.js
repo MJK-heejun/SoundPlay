@@ -23,6 +23,18 @@ angular.module('soundPlay')
     //view enabler flag
     $scope.is_accelerometer_enabled = false;
 
+    //Available selection for up/down action in filter,play views
+    $scope.filter_view_selection_arr = ["none", "lowpass", "highpass", "bandpass"];
+    $scope.play_view_selection_arr = ["Play", "Stop", "Pause"];
+    //index for the selection arrays
+    $scope.f_v_s_p_index = $scope.filter_view_selection_arr.length - 1;
+    $scope.f_v_s_c_index = 0;
+    $scope.f_v_s_n_index = 1;
+    $scope.p_v_s_p_index = $scope.play_view_selection_arr.length - 1;
+    $scope.p_v_s_c_index = 0;
+    $scope.p_v_s_n_index = 1;
+
+
     //listen for accelerometer
     window.addEventListener('deviceorientation', handleOrientation);
 
@@ -107,10 +119,16 @@ globals.current_music_id = 48230395;
       // tell the source which sound to play
       g_sound.source.buffer = g_sound.mySoundBuffer;  
 
-      g_sound.source.connect(g_sound.panner);
-      g_sound.panner.connect(g_sound.context.destination);
-
-      //g_sound.source.connect(g_sound.context.destination); 
+      //connect/disconnect filter node depending on the setting
+      if($scope.filter_type == "none"){
+        g_sound.source.connect(g_sound.panner);
+        g_sound.panner.connect(g_sound.context.destination);
+      }else{        
+        g_sound.source.connect(g_sound.filter);
+        g_sound.filter.connect(g_sound.panner);        
+        g_sound.filter.connect(g_sound.context.destination);
+        g_sound.filter.type = $scope.filter_type;
+      }
 
 
       if(g_sound.isPaused){
@@ -173,11 +191,73 @@ globals.current_music_id = 48230395;
           $scope.view -= 1;
       }
     }; 
+
+    $scope.upDownArrowAction = function(arrow_clicked){
+      switch($scope.view){
+        case play_view:          
+          if(arrow_clicked == 'u'){
+
+          }else if(arrow_clicked == 'd'){
+
+          }
+        break;
+        case filter_view:
+          //index update
+          if(arrow_clicked == 'u'){
+            $scope.f_v_s_p_index = $scope.f_v_s_p_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_p_index-1;
+            $scope.f_v_s_c_index = $scope.f_v_s_c_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_c_index-1;
+            $scope.f_v_s_n_index = $scope.f_v_s_n_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_n_index-1;            
+          }else{
+            $scope.f_v_s_p_index = $scope.f_v_s_p_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_p_index+1;
+            $scope.f_v_s_c_index = $scope.f_v_s_c_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_c_index+1;
+            $scope.f_v_s_n_index = $scope.f_v_s_n_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_n_index+1;            
+          }
+          //keep track of the current filter type
+          $scope.filter_type = $scope.filter_view_selection_arr[$scope.f_v_s_c_index];
+          //update the filter type accordingly
+          filterChange();
+        break;
+      }
+    };
+
 /*
     $scope.lowFilter = function(){
       
     };
 */
+
+    function filterChange(){
+      if($scope.filter_view_selection_arr[$scope.f_v_s_p_index] != 'none'){
+        if($scope.filter_type == 'none'){
+          //disconnect all node
+          disconnectAllNode();
+          //connect the nodes again without filter node
+          g_sound.source.connect(g_sound.panner);
+          g_sound.panner.connect(g_sound.context.destination);
+        }else{
+          //no need to disconnect/reconnect node. Just update the filter type
+          g_sound.filter.type = $scope.filter_type;
+        }
+      }else{
+        //disconnect all node
+        disconnectAllNode();
+        //connect all nodes together, including the filter node
+        g_sound.source.connect(g_sound.filter);
+        g_sound.filter.connect(g_sound.panner);        
+        g_sound.filter.connect(g_sound.context.destination);
+
+        //update the filter type
+        g_sound.filter.type = $scope.filter_type;
+      }
+    }
+
+    //disconnect audio node
+    function disconnectAllNode(){
+      g_sound.source.disconnect();
+      g_sound.filter.disconnect();
+      g_sound.panner.disconnect();
+    }
+
     //accelerometer event function
     function handleOrientation(event) {
       // Do stuff with the new orientation data
