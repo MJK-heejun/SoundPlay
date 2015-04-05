@@ -69,10 +69,11 @@ app.factory('g_sound', function(globals){
   //g_sound.audio = new Audio();
   g_sound.source;
   //g_sound.filter;
-  g_sound.url;
   g_sound.mySoundBuffer = null;
-  g_sound.pausedAt;
-  g_sound.isPaused = false;
+  //g_sound.pausedAt;
+  //g_sound.isPaused = false;
+  g_sound.isStopped = true;
+
 
   return g_sound;
 });

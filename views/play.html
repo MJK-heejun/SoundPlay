@@ -10,39 +10,30 @@
 	<div class="loading-msg">spinner</div>
 
 </div>
+<!--
 <div ng-show="view=='1'">
-	<!-- play view -->
 	<div class="row">
-		<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
-			UA
-		</div>
-	</div>	
-	<div class="row">
-		<div class="col-xs-12 tac">
-			{{play_view_selection_arr[p_v_s_p_index]}}
+		<div class="col-xs-12 tac" ng-click="play()">
+			Play
 		</div>
 	</div>		
 	<div class="col-xs-2" ng-click="changeView('l')">
 		LA
 	</div>
 	<div class="col-xs-8 tac">
-		{{play_view_selection_arr[p_v_s_c_index]}}
+		{{play_view_selection_center}}
 	</div>
 	<div class="col-xs-2" ng-click="changeView('r')">
 		RA
 	</div>		
 	<div class="row">
-		<div class="col-xs-12 tac">
-			{{play_view_selection_arr[p_v_s_n_index]}}
-		</div>
-	</div>	
-	<div class="row">
-		<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
-			DA
+		<div class="col-xs-12 tac" ng-click="stop()">
+			Stop
 		</div>
 	</div>		
 </div>
-<div ng-show="view==2">
+-->
+<div ng-show="view==1">
 	<!-- filter view -->
 	<div class="row">
 		<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
@@ -74,7 +65,7 @@
 		</div>
 	</div>		
 </div>
-<div ng-show="view==3">
+<div ng-show="view==2">
 	<!-- spatial sound view -->
 	<div class="row">
 		<div class="col-xs-2" ng-click="changeView('l')">
@@ -93,27 +84,38 @@
 		</div>		
 	</div>
 </div>
-<div ng-show="view==4">
+<div ng-show="view==3">
 	<!-- playback rate view -->
-	<div class="col-xs-2" ng-click="changeView('l')">
-		LA
+	<div class="row">
+		<div class="col-xs-2" ng-click="changeView('l')">
+			LA
+		</div>
+		<div class="col-xs-8 tac">
+			<p>Playback Rate</p>
+			Use GPS speed detector
+			<input type="checkbox" ng-model='is_geolocation_enabled' />		
+			<form>
+				<input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
+			</form>	
+		</div>
+		<div class="col-xs-2" ng-click="changeView('r')">
+			RA
+		</div>	
 	</div>
-	<div class="col-xs-8 tac">
-		<p>Playback Rate</p>
-		Use GPS speed detector
-		<input type="checkbox" ng-model='is_geolocation_enabled' />		
-		<form>
-			<input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
-		</form>	
-	</div>
-	<div class="col-xs-2" ng-click="changeView('r')">
-		RA
-	</div>	
 </div>
 
 
 
-<br/><br/><br/><br/>
+<br/><br/>
+<div ng-show="view!='0'" ng-click="play()">
+	Play
+</div>
+<br/>
+<div ng-show="view!='0'" ng-click="stop()">
+	Stop
+</div>
+<br/><br/>
+
 <div ng-show="view!='0'" ng-click="saveDb()">
 	Save the setting
 </div>

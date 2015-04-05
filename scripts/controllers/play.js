@@ -12,7 +12,7 @@ angular.module('soundPlay')
 
 
     //preference restored from indexdb    
-    var loading_view = 0, play_view = 1, filter_view = 2, spatial_view = 3, playback_view = 4;    
+    var loading_view = 0, filter_view = 1, spatial_view = 2, playback_view = 3;    
     $scope.view = loading_view;
 
     //set default values
@@ -26,14 +26,15 @@ angular.module('soundPlay')
 
     //Available selection for up/down action in filter,play views
     $scope.filter_view_selection_arr = ["none", "lowpass", "highpass", "bandpass"];
-    $scope.play_view_selection_arr = ["Play", "Stop", "Pause"];
+    /*
+    $scope.play_view_selection_up = "Pause";
+    $scope.play_view_selection_center = "Play";
+    $scope.play_view_selection_down = "Stop";
+    */
     //index for the selection arrays
     $scope.f_v_s_p_index = $scope.filter_view_selection_arr.length - 1;
     $scope.f_v_s_c_index = 0;
     $scope.f_v_s_n_index = 1;
-    $scope.p_v_s_p_index = $scope.play_view_selection_arr.length - 1;
-    $scope.p_v_s_c_index = 0;
-    $scope.p_v_s_n_index = 1;
 
 
     //listen for accelerometer
@@ -97,11 +98,12 @@ globals.current_music_id = 48230395;
               g_sound.mySoundBuffer = buffer;                      
               //g_sound.mySoundBuffer = yoink;                      
 
-              g_sound.isPaused = false;
+              //g_sound.isPaused = false;
+
               $scope.play();            
 
               $scope.$apply(function() {
-                  $scope.view = play_view;
+                  $scope.view = filter_view;
               });                
           }, onError);
       };
@@ -115,34 +117,136 @@ globals.current_music_id = 48230395;
     }
 
 
-    $scope.play = function(){        
-      g_sound.source = g_sound.context.createBufferSource();
-      // tell the source which sound to play
-      g_sound.source.buffer = g_sound.mySoundBuffer;  
+    $scope.play = function(){       
+      if(g_sound.isStopped){
+        g_sound.isStopped = false;
 
-      //setting playback rate
-      g_sound.source.playbackRate.value = $scope.playback_rate;
+        g_sound.source = g_sound.context.createBufferSource();
+
+        // tell the source which sound to play
+        g_sound.source.buffer = g_sound.mySoundBuffer;  
+
+        //setting playback rate
+        g_sound.source.playbackRate.value = $scope.playback_rate;
 
 
-      //connect/disconnect filter node depending on the setting
-      if($scope.filter_type == "none"){
-        g_sound.source.connect(g_sound.panner);
-        g_sound.panner.connect(g_sound.context.destination);
-      }else{        
-        g_sound.source.connect(g_sound.filter);
-        g_sound.filter.connect(g_sound.panner);        
-        g_sound.panner.connect(g_sound.context.destination);
-        g_sound.filter.type = $scope.filter_type;
+        //connect/disconnect filter node depending on the setting
+        if($scope.filter_type == "none"){
+          g_sound.source.connect(g_sound.panner);
+          g_sound.panner.connect(g_sound.context.destination);
+        }else{        
+          g_sound.source.connect(g_sound.filter);
+          g_sound.filter.connect(g_sound.panner);        
+          g_sound.panner.connect(g_sound.context.destination);
+          g_sound.filter.type = $scope.filter_type;
+        }
+
+        g_sound.source.start(0, 0);                    
+        /*
+        if(g_sound.isPaused){
+          g_sound.isPaused = false;
+          g_sound.source.start(0, g_sound.pausedAt); 
+        }else{
+          g_sound.pausedAt = 0;
+          g_sound.source.start(0, 0);                    
+        }
+          */
+      }                                             
+    };
+/*
+    $scope.pause = function(){
+      g_sound.startOffset += g_sound.context.currentTime - g_sound.startTime;
+      //save the paused time of the music 
+      g_sound.pausedAt = g_sound.source.context.currentTime;
+      g_sound.isPaused = true;
+      g_sound.source.stop(0);
+
+      //console.log(g_sound.source.context.currentTime);
+    };
+*/
+    $scope.stop = function(){
+      //g_sound.isPaused = false;
+      //g_sound.pausedAt = 0;
+      g_sound.isStopped = true;
+      g_sound.source.stop(0);  
+    };
+
+
+    //save/reset setting into indexedb
+    $scope.saveDb = function(){
+      mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
+    };
+    $scope.resetDb = function(){
+      mydb.remove(globals.current_music_id);
+    };
+
+
+
+
+    $scope.changeView = function(arrow_clicked){
+      if(arrow_clicked == 'r'){
+        $scope.view = $scope.view % 3 + 1;        
+      }else if(arrow_clicked == 'l'){
+        if($scope.view == 1)
+          $scope.view = 3;
+        else
+          $scope.view -= 1;
       }
+    }; 
 
+    $scope.upDownArrowAction = function(arrow_clicked){
+      switch($scope.view){
+/*        
+        case play_view:          
 
-      if(g_sound.isPaused){
-        g_sound.isPaused = false;
-        g_sound.source.start(0, g_sound.pausedAt); 
-      }else{
-        g_sound.source.start(0, 0);                      
+          if(arrow_clicked == 'u'){
+            if($scope.play_view_selection_center == "Play"){
+              $scope.play_view_selection_up = "";
+              $scope.play_view_selection_center = "Pause";
+              $scope.play_view_selection_down = "Play";
+            }else if($scope.play_view_selection_center == "Stop"){
+              $scope.play_view_selection_up = "Pause";
+              $scope.play_view_selection_center = "Play";
+              $scope.play_view_selection_down = "Stop";              
+            }              
+          }else if(arrow_clicked == 'd'){
+            if($scope.play_view_selection_center == "Play"){
+              $scope.play_view_selection_up = "Play";
+              $scope.play_view_selection_center = "Stop";
+              $scope.play_view_selection_down = "";
+            }else if($scope.play_view_selection_center == "Pause"){
+              $scope.play_view_selection_up = "Pause";
+              $scope.play_view_selection_center = "Play";
+              $scope.play_view_selection_down = "Stop";              
+            }              
+          }
+
+          if($scope.play_view_selection_center == 'Play')
+            $scope.play();
+          else if($scope.play_view_selection_center == 'Pause')
+            $scope.pause();
+          else
+            $scope.stop();
+
+        break;
+        */
+        case filter_view:
+          //index update
+          if(arrow_clicked == 'u'){
+            $scope.f_v_s_p_index = $scope.f_v_s_p_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_p_index-1;
+            $scope.f_v_s_c_index = $scope.f_v_s_c_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_c_index-1;
+            $scope.f_v_s_n_index = $scope.f_v_s_n_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_n_index-1;            
+          }else{
+            $scope.f_v_s_p_index = $scope.f_v_s_p_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_p_index+1;
+            $scope.f_v_s_c_index = $scope.f_v_s_c_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_c_index+1;
+            $scope.f_v_s_n_index = $scope.f_v_s_n_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_n_index+1;            
+          }
+          //keep track of the current filter type
+          $scope.filter_type = $scope.filter_view_selection_arr[$scope.f_v_s_c_index];
+          //update the filter type accordingly
+          filterChange();
+        break;
       }
-                                                       
     };
 
 
@@ -255,82 +359,6 @@ globals.current_music_id = 48230395;
       console.log(newval+" "+oldval);      
     }, true); 
 
-    //save/reset setting into indexedb
-    $scope.saveDb = function(){
-      mydb.insert(globals.current_music_id, $scope.filter_type, $scope.playback_rate, $scope.spatial_x);
-    };
-    $scope.resetDb = function(){
-      mydb.remove(globals.current_music_id);
-    };
-
-
-    $scope.pause = function(){
-      //save the paused time of the music 
-      g_sound.pausedAt = g_sound.source.context.currentTime;
-      g_sound.isPaused = true;
-      g_sound.source.stop(0);
-
-      //console.log(g_sound.source.context.currentTime);
-    };
-
-    $scope.stop = function(){
-      g_sound.isPaused = false;
-      g_sound.pausedAt = 0;
-      g_sound.source.stop(0);
-      g_sound.source.context.currentTime = 0;      
-    };
-
-
-    $scope.changeView = function(arrow_clicked){
-      if(arrow_clicked == 'r'){
-        $scope.view = $scope.view % 4 + 1;        
-      }else if(arrow_clicked == 'l'){
-        if($scope.view == 1)
-          $scope.view = 4;
-        else
-          $scope.view -= 1;
-      }
-    }; 
-
-    $scope.upDownArrowAction = function(arrow_clicked){
-      switch($scope.view){
-        case play_view:          
-          if(arrow_clicked == 'u'){
-            $scope.p_v_s_p_index = $scope.p_v_s_p_index-1 < 0 ? $scope.play_view_selection_arr.length - 1 : $scope.p_v_s_p_index-1;
-            $scope.p_v_s_c_index = $scope.p_v_s_c_index-1 < 0 ? $scope.play_view_selection_arr.length - 1 : $scope.p_v_s_c_index-1;
-            $scope.p_v_s_n_index = $scope.p_v_s_n_index-1 < 0 ? $scope.play_view_selection_arr.length - 1 : $scope.p_v_s_n_index-1;            
-          }else if(arrow_clicked == 'd'){
-            $scope.p_v_s_p_index = $scope.p_v_s_p_index+1 >= $scope.play_view_selection_arr.length ? 0 : $scope.p_v_s_p_index+1;
-            $scope.p_v_s_c_index = $scope.p_v_s_c_index+1 >= $scope.play_view_selection_arr.length ? 0 : $scope.p_v_s_c_index+1;
-            $scope.p_v_s_n_index = $scope.p_v_s_n_index+1 >= $scope.play_view_selection_arr.length ? 0 : $scope.p_v_s_n_index+1;            
-          }
-
-          if($scope.play_view_selection_arr[$scope.p_v_s_c_index] == 'Play')
-            $scope.play();
-          else if($scope.play_view_selection_arr[$scope.p_v_s_c_index] == 'Pause')
-            $scope.pause();
-          else
-            $scope.stop();
-
-        break;
-        case filter_view:
-          //index update
-          if(arrow_clicked == 'u'){
-            $scope.f_v_s_p_index = $scope.f_v_s_p_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_p_index-1;
-            $scope.f_v_s_c_index = $scope.f_v_s_c_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_c_index-1;
-            $scope.f_v_s_n_index = $scope.f_v_s_n_index-1 < 0 ? $scope.filter_view_selection_arr.length - 1 : $scope.f_v_s_n_index-1;            
-          }else{
-            $scope.f_v_s_p_index = $scope.f_v_s_p_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_p_index+1;
-            $scope.f_v_s_c_index = $scope.f_v_s_c_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_c_index+1;
-            $scope.f_v_s_n_index = $scope.f_v_s_n_index+1 >= $scope.filter_view_selection_arr.length ? 0 : $scope.f_v_s_n_index+1;            
-          }
-          //keep track of the current filter type
-          $scope.filter_type = $scope.filter_view_selection_arr[$scope.f_v_s_c_index];
-          //update the filter type accordingly
-          filterChange();
-        break;
-      }
-    };
 
     function filterChange(){
       if($scope.filter_view_selection_arr[$scope.f_v_s_p_index] != 'none'){
