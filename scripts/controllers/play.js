@@ -193,15 +193,15 @@ globals.current_music_id = 48230395;
                   $scope.playback_rate += 0.1;
                 else
                   $scope.playback_rate -= 0.1;
-              //man walking speed = 1.38582 meter per sec
+              //man walking speed = 1.38582 meter per sec: but have it as 0.7mps
               // => playback-rate speed up to 1.3x              
-              }else if(meter_per_sec > 1.3852){
+              }else if(meter_per_sec > 0.7){
                 if($scope.playback_rate < 1.3)
                   $scope.playback_rate += 0.1;
                 else
                   $scope.playback_rate -= 0.1;
               //reduce playback rate gradually when slower than walking speed
-              }else if(meter_per_sec < 1.3852 && $scope.playback_rate > 1){
+              }else if(meter_per_sec < 0.7 && $scope.playback_rate > 1){
                 $scope.playback_rate -= 0.1;
               }
 
@@ -212,7 +212,10 @@ globals.current_music_id = 48230395;
               $('#p_long').text("prev long:"+prev_long);
               $('#c_lat').text("cur lat:"+cur_lat);
               $('#c_long').text("cur long:"+cur_long);
-              $('#mps').text(meter_per_sec+"mps");
+              if(meter_per_sec != 0){
+                $('#mps').text(meter_per_sec+"mps");  
+              }
+              
 
 
               //set prev as curret
