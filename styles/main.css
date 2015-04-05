@@ -109,20 +109,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* question1: what is spinner- container*/
 
 
-
-/*homepage styling*/
-html { 
-    background: url(images/bg.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-    
-
-body {
-    /*background-image: url("images/background.png");*/
-    /*background-color: #ddd;*/
+* body{
+   /* background-image: url("/images/background.jpg");*/
+    background-color: #f2f2f4;
 }
 
 .title{
@@ -181,3 +170,64 @@ body {
 .tickBox{
   margin-bottom: 10%;
 }
+
+
+
+/*arrow left and right*/
+/* Actual arrows
+----------------------*/
+.arrow{ }
+.arrow::before{ content:'';
+  display:block; 
+  padding:50px; 
+  box-shadow:-1px -1px 0 1px #cdcdcd; 
+  cursor:pointer; 
+  -webkit-transform:rotate(-45deg);
+  transform:rotate(-45deg); 
+  -webkit-transition:.3s;
+  transition:.3s; }
+.arrow:hover::before{ box-shadow:-2px -2px 0 2px #F78824; }
+.arrow.right::before{ box-shadow:1px 1px 0 1px #cdcdcd; }
+.arrow.right:hover::before{ box-shadow:2px 2px 0 2px #F78824; }
+
+ 
+/* Basic page reset for this demo
+--------------------------------------*/
+ 
+*{ margin:0; padding:0; }
+.arrow{ position:absolute; top:50%; margin-top:-50px; margin-left: 30%;  margin-right: 30%; }
+.arrow.left{ left:35%; }
+.arrow.right{ right:35%; }
+
+
+
+
+/*arrow up and down*/
+/* Actual arrows
+----------------------*/
+.arrow2{ }
+.arrow2::before{ content:'';
+  display:block; 
+  padding:50px; 
+  box-shadow:-1px -1px 0 1px #cdcdcd; 
+  cursor:pointer; 
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg); 
+  -webkit-transition:.3s;
+  transition:.3s; }
+.arrow2:hover::before{ box-shadow:-2px -2px 0 2px #F78824; }
+.arrow2.down::before{ box-shadow:1px 1px 0 1px #cdcdcd; }
+.arrow2.down:hover::before{ box-shadow:2px 2px 0 2px#F78824; }
+ 
+ 
+/* Basic page reset for this demo
+--------------------------------------*/
+.arrow2{ position:absolute; top:50%; margin-top:-50px; 
+
+margin-left: 38%;  margin-right: 38%;
+
+}
+
+
+/*.arrow2.left{ left:100%; }
+.arrow2.right{ right:35%; }*/

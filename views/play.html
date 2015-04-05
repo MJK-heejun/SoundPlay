@@ -38,7 +38,7 @@
 	<div class="filter">
 		<div class="row up-down">
 			<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
-				UA
+				<p class="arrow2 top"> </p>
 			</div>
 		</div>
 
@@ -48,16 +48,16 @@
 			</div>
 		</div>	
 
-		<div class="col-xs-2 arrow prev" ng-click="changeView('l')">
-			LA
+		<div class="col-xs-2" ng-click="changeView('l')">
+			<p class="arrow left"></p>
 		</div>
 
 		<div class="col-xs-8 tac current" >
 			{{filter_view_selection_arr[f_v_s_c_index]}}
 		</div>
 
-		<div class="col-xs-2 arrow next" ng-click="changeView('r')">
-			RA
+		<div class="col-xs-2" ng-click="changeView('r')">
+			<p class="arrow right"></p>
 		</div>	
 
 		<div class="row">
@@ -68,7 +68,7 @@
 
 		<div class="row up-down">
 			<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
-				DA
+				<p class="arrow2 down"> </p>
 			</div>
 		</div>	
 	</div>	
@@ -80,7 +80,7 @@
 		<div class="row">
 
 			<div class="col-xs-2" ng-click="changeView('l')">
-				LA
+				<p class="arrow left"></p>
 			</div>
 
 			<div class="col-xs-8 tac">
@@ -92,7 +92,7 @@
 			</div>
 
 			<div class="col-xs-2" ng-click="changeView('r')">
-				RA
+				<p class="arrow right"></p>
 			</div>
 
 		</div>
@@ -105,7 +105,7 @@
 		<div class="row">
 
 			<div class="col-xs-2" ng-click="changeView('l')">
-				LA
+				<p class="arrow left"></p>
 			</div>
 
 			<div class="col-xs-8 tac">
@@ -117,7 +117,7 @@
 			</div>
 
 			<div class="col-xs-2" ng-click="changeView('r')">
-				RA
+				<p class="arrow right"></p>
 			</div>
 
 		</div>
@@ -127,23 +127,39 @@
 
 
 <br/><br/>
-<div ng-show="view!='0'" ng-click="play()" class="play">
-	Play
-</div>
 
+<button type="button" class="btn btn-default btn-lg btn-block play" ng-show="view!='0'" ng-click="play()">
+	Play
+</button>
+
+<button type="button" class="btn btn-default btn-lg btn-block stop" ng-show="view!='0'" ng-click="stop()">
+	Stop
+</button>
+
+<!-- <div ng-show="view!='0'" ng-click="play()" class="play">
+	Play
+</div> -->
+<!-- 
 <br/>
 
 <div ng-show="view!='0'" ng-click="stop()" class="stop">
 	Stop
-</div>
+</div> -->
 
-<br/><br/>
+<br/><br/><br/><br/>
 
-<div ng-show="view!='0'" ng-click="saveDb()" class="save">
+<button type="button" class="btn btn-default btn-lg btn-block save" ng-show="view!='0'" ng-click="saveDb()">
+	Save the setting
+</button>
+
+<button type="button" class="btn btn-default btn-lg btn-block reset"  ng-show="view!='0'" ng-click="resetDb()">
+	Reset the setting
+</button>
+
+<!-- <div ng-show="view!='0'" ng-click="saveDb()" class="save">
 	Save the setting
 </div>
-
-<div ng-show="view!='0'" ng-click="resetDb()" class="reset">
+ -->
+<!-- <div ng-show="view!='0'" ng-click="resetDb()" class="reset">
 	Reset the setting
-</div>
-
+</div> -->
