@@ -172,14 +172,13 @@ globals.current_music_id = 48230395;
     //accelerometer event function
     function handleOrientation(event) {
       // Do stuff with the new orientation data
-      alert("yes my lord?");
-      $('#ttt').text('ttt initiated');
 
       var absolute = event.absolute;
       var alpha    = event.alpha;
       var beta     = event.beta;
       var gamma    = event.gamma;
-     
+      $scope.$apply(function() {
+      }); 
       if($scope.is_accelerometer_enabled && gamma > 30){
         //if less than 10, increase panner pos by 0.1
         if($scope.spatial_x < 10)
@@ -196,6 +195,8 @@ globals.current_music_id = 48230395;
 
       $('#gamma').text(gamma);
       $('#xPos').text($scope.spatial_x);        
+      $('#acc').text($scope.is_accelerometer_enabled);        
+      
     }
 /*
     function resetPanner(){

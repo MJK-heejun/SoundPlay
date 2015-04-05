@@ -30,7 +30,7 @@
 </div>
 
 Use accelerometer 
-<input type="checkbox" ng-checked='is_accelerometer_enabled' />
+<input type="checkbox" ng-model='is_accelerometer_enabled' />
 <form>
 fsdg
 	<input id="accel_range" type="range" ng-model="spatial_x" min="-10" max="10" step="0.1" value="0" >			
@@ -48,10 +48,9 @@ fsdg
 <div id="xPos">
 	print xPos
 </div>
-<div id="ttt">
+<div id="acc">
 	yo ttt
 	</div>
-
 <br/><br/><br/><br/>
 <div id="reset">
 	reset everything
