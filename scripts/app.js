@@ -63,10 +63,7 @@ app.factory('g_sound', function(globals){
   g_sound.panner = g_sound.context.createPanner();
   g_sound.listener = g_sound.context.listener;
   g_sound.listener.setPosition(0, 0, 300);
-  //position tracked for panner
-  g_sound.xPos;
-  g_sound.yPos;
-  g_sound.zPos;
+
 
 
   //g_sound.audio = new Audio();

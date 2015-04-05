@@ -19,8 +19,10 @@ angular.module('soundPlay')
     $scope.playback_rate = 1;
     $scope.spatial_x = 0;
     $scope.filter_type = "none";
-
     
+    //view enabler flag
+    $scope.is_accelerometer_enabled = false;
+
     //listen for accelerometer
     window.addEventListener('deviceorientation', handleOrientation);
 
@@ -105,11 +107,10 @@ globals.current_music_id = 48230395;
       // tell the source which sound to play
       g_sound.source.buffer = g_sound.mySoundBuffer;  
 
-      g_sound.source.connect(g_sound.context.destination); 
+      g_sound.source.connect(g_sound.panner);
+      g_sound.panner.connect(g_sound.context.destination);
 
-      //g_sound.source.connect(g_sound.panner);
-      //pannerSetPos(0, 0, 295); //private function
-      //g_sound.panner.connect(g_sound.context.destination);
+      //g_sound.source.connect(g_sound.context.destination); 
 
 
       if(g_sound.isPaused){
@@ -121,6 +122,13 @@ globals.current_music_id = 48230395;
                                                        
     };
 
+
+
+    //spatial_x change
+    $scope.$watch('spatial_x', function(){     
+      console.log("spatial_x: "+$scope.spatial_x);
+      g_sound.panner.setPosition(parseFloat($scope.spatial_x), 0, 298);      
+    }, true);
 
     //playback rate change
     $scope.$watch('playback_rate', function(){      
@@ -168,29 +176,27 @@ globals.current_music_id = 48230395;
       var alpha    = event.alpha;
       var beta     = event.beta;
       var gamma    = event.gamma;
-/*      
-      if(!g_sound.isPaused && gamma > 30){
+     
+      if($scope.is_accelerometer_enabled && gamma > 30){
         //if less than 10, increase panner pos by 0.1
-        if(g_sound.xPos < 10)
-          g_sound.xPos += 0.1;        
-      }else if(!g_sound.isPaused && gamma < -30){
+        if($scope.spatial_x < 10)
+          $scope.spatial_x += 0.1;        
+      }else if($scope.is_accelerometer_enabled && gamma < -30){
         //if bigger than -10, decrease panner pos by 0.1
-        if(g_sound.xPos > -10)
-          g_sound.xPos -= 0.1;
+        if($scope.spatial_x > -10)
+          $scope.spatial_x -= 0.1;
       }
-      pannerSetPos(g_sound.xPos, g_sound.yPos, g_sound.zPos);
-*/
+
+      g_sound.panner.setPosition(parseFloat($scope.spatial_x), 0, 298);
+
+      //pannerSetPos($scope.spatial_x, g_sound.yPos, g_sound.zPos);
+
       //$('#gamma').text(gamma);
-      //$('#xPos').text(g_sound.xPos);      
+      //$('#xPos').text($scope.spatial_x);      
     }
 /*
     function resetPanner(){
-      g_sound.xPos = 0;
-      g_sound.yPos = 0;
-      g_sound.zPos = 295;      
-    }
-    function pannerSetPos(xPos, yPos, zPos){
-      g_sound.panner.setPosition(xPos, yPos, zPos);
+      $scope.spatial_x = 0;    
     }
 */
 
