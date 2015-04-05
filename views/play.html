@@ -36,31 +36,37 @@
 <div ng-show="view==1">
 	<!-- filter view -->
 	<div class="filter">
-		<div class="row">
+		<div class="row up-down">
 			<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
 				UA
 			</div>
-		</div>	
+		</div>
+
 		<div class="row">
-			<div class="col-xs-12 tac">
+			<div class="col-xs-12 tac uncurrent">
 				{{filter_view_selection_arr[f_v_s_p_index]}}
 			</div>
-		</div>		
-		<div class="col-xs-2" ng-click="changeView('l')">
+		</div>	
+
+		<div class="col-xs-2 arrow prev" ng-click="changeView('l')">
 			LA
 		</div>
-		<div class="col-xs-8 tac">
+
+		<div class="col-xs-8 tac current" >
 			{{filter_view_selection_arr[f_v_s_c_index]}}
 		</div>
-		<div class="col-xs-2" ng-click="changeView('r')">
+
+		<div class="col-xs-2 arrow next" ng-click="changeView('r')">
 			RA
 		</div>	
+
 		<div class="row">
-			<div class="col-xs-12 tac">
+			<div class="col-xs-12 tac uncurrent">
 				{{filter_view_selection_arr[f_v_s_n_index]}}
 			</div>
 		</div>	
-		<div class="row">
+
+		<div class="row up-down">
 			<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
 				DA
 			</div>
@@ -72,20 +78,23 @@
 	<!-- spatial sound view -->
 	<div class="filter">
 		<div class="row">
+
 			<div class="col-xs-2" ng-click="changeView('l')">
 				LA
 			</div>
+
 			<div class="col-xs-8 tac">
-				<p>Spatial Sound</p>
-				Use accelerometer 
-				<input type="checkbox" ng-model='is_accelerometer_enabled' />
+				<p class="current">Spatial Sound</p>
+				<div class="tickBox">Use accelerometer <input type="checkbox" ng-model='is_accelerometer_enabled' /></div>
 				<form>
 					<input id="accel_range" type="range" ng-model="spatial_x" min="-10" max="10" step="0.1" value="0" >			
 				</form>
 			</div>
+
 			<div class="col-xs-2" ng-click="changeView('r')">
 				RA
-			</div>		
+			</div>
+
 		</div>
 	</div>	
 </div>
@@ -94,20 +103,23 @@
 	<!-- playback rate view -->
 	<div class="filter">
 		<div class="row">
+
 			<div class="col-xs-2" ng-click="changeView('l')">
 				LA
 			</div>
+
 			<div class="col-xs-8 tac">
-				<p>Playback Rate</p>
-				Use GPS speed detector
-				<input type="checkbox" ng-model='is_geolocation_enabled' />		
+				<p class="current">Playback Rate</p>
+				<div class="tickBox">Use GPS speed detector<input type="checkbox" ng-model='is_geolocation_enabled' /></div>
 				<form>
 					<input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
 				</form>	
 			</div>
+
 			<div class="col-xs-2" ng-click="changeView('r')">
 				RA
-			</div>	
+			</div>
+
 		</div>
 	</div>	
 </div>
@@ -134,3 +146,4 @@
 <div ng-show="view!='0'" ng-click="resetDb()" class="reset">
 	Reset the setting
 </div>
+

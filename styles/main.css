@@ -61,7 +61,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: goldenrod;
+    background: #F9903A;
     margin-top: -4px;
 }
 
@@ -140,10 +140,10 @@ body {
 
 
 
-/*----------------------------play page styling----------------------------------------------------------*/
+ /*playpage styling*/
 .filter{
   margin-top: 15%;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
 }
 
 .play{
@@ -162,4 +162,22 @@ body {
 .reset{
   /*display: inline;*/
     text-align: center;
+}
+
+.current{
+  font-size: 3rem;
+  color: #F78824;
+  font-weight: bold;
+}
+
+.uncurrent{
+  font-size: 2.2rem;
+}
+
+.up-down{
+  margin: 10%;
+}
+
+.tickBox{
+  margin-bottom: 10%;
 }
