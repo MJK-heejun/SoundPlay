@@ -8,7 +8,7 @@
  * Controller of the soundPlay
  */
 angular.module('soundPlay')
-  .controller('PlayCtrl', function ($scope, globals, $location, g_sound, mydb) {
+  .controller('PlayCtrl', function ($rootScope, $scope, globals, $location, g_sound, mydb) {
 
 
     //preference restored from indexdb    
@@ -146,6 +146,16 @@ globals.current_music_id = 48230395;
     };
 
 
+    //event action when user navigating away manually
+    $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+        try{
+          //remove geolocation setinterval
+          clearInterval(geolocation_interval);
+        }catch(e){
+          console.log(e);
+        }        
+      }
+    );
 
     //spatial_x change
     $scope.$watch('spatial_x', function(){     
@@ -267,6 +277,7 @@ globals.current_music_id = 48230395;
       g_sound.isPaused = false;
       g_sound.pausedAt = 0;
       g_sound.source.stop(0);
+      g_sound.source.context.currentTime = 0;      
     };
 
 

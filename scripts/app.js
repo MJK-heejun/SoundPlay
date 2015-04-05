@@ -73,40 +73,6 @@ app.factory('g_sound', function(globals){
   g_sound.mySoundBuffer = null;
   g_sound.pausedAt;
   g_sound.isPaused = false;
-  /*
-  var score = {}; //object declaration
-
-  score.attractions = 0;
-  score.entertainment = 0;
-  score.location = 0;
-  score.history = 0;
-  score.sports = 0;
-
-  score.getTotalScore = function(){
-    return score.attractions + score.entertainment + score.location + score.history + score.sports;
-  }
-
-  score.setToZero = function(category){
-    switch(category){
-      case "attractions":   
-        score.attractions = 0;     
-      break;
-      case "entertainment":
-        score.entertainment = 0;
-      break;
-      case "location":
-        score.location = 0;
-      break;
-      case "history":
-        score.history = 0;
-      break;
-      case "sports":
-        score.sports = 0;
-      break;
-      default: 
-    }
-  }
-*/
 
   return g_sound;
 });
