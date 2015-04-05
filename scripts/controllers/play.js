@@ -361,28 +361,17 @@ globals.current_music_id = 48230395;
 
 
     function filterChange(){
-      if($scope.filter_view_selection_arr[$scope.f_v_s_p_index] != 'select filters'){
-        if($scope.filter_type == 'select filters'){
-          //disconnect all node
-          disconnectAllNode();
-          //connect the nodes again without filter node
-          g_sound.source.connect(g_sound.panner);
-          g_sound.panner.connect(g_sound.context.destination);
-        }else{
-          //no need to disconnect/reconnect node. Just update the filter type
-          g_sound.filter.type = $scope.filter_type;
-        }
+      disconnectAllNode();
+      if($scope.filter_type == 'select filters'){
+        g_sound.source.connect(g_sound.panner);
+        g_sound.panner.connect(g_sound.context.destination);
       }else{
-        //disconnect all node
-        disconnectAllNode();
-        //connect all nodes together, including the filter node
         g_sound.source.connect(g_sound.filter);
         g_sound.filter.connect(g_sound.panner);        
-        g_sound.panner.connect(g_sound.context.destination);
-
-        //update the filter type
-        g_sound.filter.type = $scope.filter_type;
+        g_sound.panner.connect(g_sound.context.destination);              
       }
+
+      g_sound.filter.type = $scope.filter_type;
     }
 
     //disconnect audio node
