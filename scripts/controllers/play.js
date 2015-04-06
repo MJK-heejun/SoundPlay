@@ -37,7 +37,7 @@ angular.module('soundPlay')
     window.addEventListener('deviceorientation', handleOrientation);
 
 
-globals.current_music_id = 48230395;
+//globals.current_music_id = 8390970;
     try{
       //stop music to play a new one
       g_sound.source.stop(0);
@@ -74,11 +74,17 @@ globals.current_music_id = 48230395;
       }
 
 
-      var request = new XMLHttpRequest();
+      var request = new XMLHttpRequest();      
       //var url = 'http://api.soundcloud.com/tracks/'+globals.current_music_id+'/stream?client_id='+globals.client_id; 
-        var url = "http://api.soundcloud.com/tracks/48230395/stream?client_id=22a6f6d4d6138acff711c666f09a62c7";
+      //var url = "http://api.soundcloud.com/tracks/8390970/stream?client_id=22a6f6d4d6138acff711c666f09a62c7";
+
+      var url = "http://jhjkim.com/soundPlayTerminal.php?track_num="+globals.current_music_id+"&client_id="+globals.client_id;
+      //var url = "http://jhjkim.com/soundPlayTerminal.php?track_num=8390970&client_id=22a6f6d4d6138acff711c666f09a62c7";
+
       request.open("GET", url, true);
       request.responseType = "arraybuffer";
+      //request.withCredentials = true;
+      //console.log(request.withCredentials);
       $('.loading-msg').text("making Http Request");
       request.onload = function(){
           $('.loading-msg').text("decoding audio");
