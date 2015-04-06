@@ -1,4 +1,15 @@
 
+html, body {
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+}
+
+html 
+{ display: table }
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
@@ -8,25 +19,15 @@
   .container {
     max-width: 730px;
   }
-/*
-  .filter{
+
+/*  .filter{
     background-color: #123;
   }*/
 }
 
+@media (max-width: 768px) {
 
-/* Main marketing message and sign up button */
-/*
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
 }
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-*/
-
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -113,9 +114,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .loadPosition{
   margin-top: 35%;
-  padding-left: 42%;
+  padding-left: 36%;
 }
-
 
 
 /*------------------------------ocean'styling starting from here------------------------------------------------*/
@@ -135,8 +135,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .appName{
   text-align: center;
-  font-size: 8rem;
+  font-size: 4rem;
   color: #F77D0F;
+
 }
 
 .title > p{
@@ -169,7 +170,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 .current{
-  font-size: 3rem;
+  font-size: 9vmin;
   color: #F78824;
   font-weight: bold;
   text-align: center;
@@ -177,7 +178,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 .uncurrent{
-  font-size: 2.2rem;
+  font-size: 6vmin;
   text-align: center;
   border: 1em;
 }
@@ -196,7 +197,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 
-
 /*arrow left and right*/
 /* Actual arrows
 ----------------------*/
@@ -204,7 +204,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .arrow{ }
 .arrow::before{ content:'';
   display:block; 
-  padding:50px;
+  padding:8vmin;
   box-shadow:-1px -1px 0 1px #cdcdcd; 
   cursor:pointer; 
   -webkit-transform:rotate(-45deg);
@@ -218,8 +218,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
  
 /* Basic page reset for this demo
 --------------------------------------*/
-  
-.arrow{ position:absolute; top:50%; margin-left: 12.5%; margin-right: 12.5%; }
+/*  
+.arrow{ position:absolute; margin-left: 12.5%; margin-right: 12.5%;}*/
 
 
 /*arrow up and down*/
@@ -229,7 +229,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .arrow2{ }
 .arrow2::before{ content:'';
   display:block; 
-  padding:50px; 
+  padding:8vmin; 
   width: 100%;
   box-shadow:-1px -1px 0 1px #cdcdcd; 
   cursor:pointer; 
@@ -245,5 +245,12 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* Basic page reset for this demo
 --------------------------------------*/
 
-.arrow2{ position:absolute; top:50%;  margin-left: 12.5%; margin-right: 12.5%;}
+.arrow2{ position:absolute; margin-left: 12.5%; margin-right: 12.5%;}
 
+.RightArrow{
+  margin-left: -20pt;
+}
+
+.LeftArrow{
+   margin-right: -20pt;
+}

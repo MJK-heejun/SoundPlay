@@ -12,37 +12,6 @@
 	<div class="loading-msg">spinner</div>
 </div>
 
-<!-- <div ng-show="view=='0'" class="loader loaderPost">
-
-
-    <div class="loading-msg">spinner</div>
-</div> -->
-
-
-
-<!--
-<div ng-show="view=='1'">
-	<div class="row">
-		<div class="col-xs-12 tac" ng-click="play()">
-			Play
-		</div>
-	</div>		
-	<div class="col-xs-2" ng-click="changeView('l')">
-		LA
-	</div>
-	<div class="col-xs-8 tac">
-		{{play_view_selection_center}}
-	</div>
-	<div class="col-xs-2" ng-click="changeView('r')">
-		RA
-	</div>		
-	<div class="row">
-		<div class="col-xs-12 tac" ng-click="stop()">
-			Stop
-		</div>
-	</div>		
-</div>
--->
 <div ng-show="view==1">
 	<!-- filter view -->
 	<div class="filter">
@@ -55,29 +24,25 @@
 		</div>
 
 		<div class="row">
-			<div class="col-xs-2" ng-click="changeView('l')">
-				<p class="arrow left"></p>
+			<div class="row">
+				<div class="tac uncurrent">
+					{{filter_view_selection_arr[f_v_s_p_index]}}
+				</div>
+			</div> 
+
+			<div class="col-xs-2" ng-click="changeView('l')"><div class="arrow LeftArrow border-b"></div></div>
+			<div class="col-xs-8 border-b">
+				<div class="current" >
+					{{filter_view_selection_arr[f_v_s_c_index]}}
+				</div>
 			</div>
-			<div class="col-xs-8">
-				<div class="row">
-					<div class="tac uncurrent">
-						{{filter_view_selection_arr[f_v_s_p_index]}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="tac current" >
-						{{filter_view_selection_arr[f_v_s_c_index]}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="tac uncurrent" >
+			<div class="col-xs-2" ng-click="changeView('r')"><div class="arrow right RightArrow border-b"></div></div>	
+
+			<div class="row">
+				<div class="tac uncurrent" >
 						{{filter_view_selection_arr[f_v_s_n_index]}}
-					</div>
-				</div>				
-			</div>
-			<div class="col-xs-2" ng-click="changeView('r')">
-				<p class="arrow right"></p>
-			</div>			
+				</div>
+			</div>	
 		</div>
 
 		<div class="row downarrow">
@@ -87,38 +52,6 @@
 			</div>
 			<div class="col-xs-4 tac"><p></p></div>
 		</div>
-
-<!--
-		<div class="row">
-			<div class="col-xs-12 tac uncurrent">
-				{{filter_view_selection_arr[f_v_s_p_index]}}
-			</div>
-		</div>	
-
-		<div class="col-xs-2" ng-click="changeView('l')">
-			<p class="arrow left"></p>
-		</div>
-
-		<div class="col-xs-8 tac current" >
-			{{filter_view_selection_arr[f_v_s_c_index]}}
-		</div>
-
-		<div class="col-xs-2" ng-click="changeView('r')">
-			<p class="arrow right"></p>
-		</div>	
-
-		<div class="row">
-			<div class="col-xs-12 tac uncurrent">
-				{{filter_view_selection_arr[f_v_s_n_index]}}
-			</div>
-		</div>	
-
-		<div class="row up-down">
-			<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
-				<p class="arrow2 down"> </p>
-			</div>
-		</div>	
--->
 	</div>	
 </div>
 
@@ -194,7 +127,7 @@
 	Stop
 </div> -->
 
-<br/><br/><br/><br/>
+<br/><br/>
 
 <button type="button" class="btn btn-default btn-lg btn-block save" ng-show="view!='0'" ng-click="saveDb()">
 	Save the setting
