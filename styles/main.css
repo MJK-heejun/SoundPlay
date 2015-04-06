@@ -1,15 +1,19 @@
 
 
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 
-/* Customize container */
+/* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
   }
+/*
+  .filter{
+    background-color: #123;
+  }*/
 }
-.container-narrow > hr {
-  margin: 30px 0;
-}
+
 
 /* Main marketing message and sign up button */
 /*
@@ -61,7 +65,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: goldenrod;
+    background: #F9903A;
     margin-top: -4px;
 }
 
@@ -101,6 +105,15 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .loading-msg {
   text-align: center;
+  color: #F77D0F;
+  margin-top: 5%;
+  font-weight: bold;
+  font-size: 10pt;
+}
+
+.loadPosition{
+  margin-top: 35%;
+  padding-left: 42%;
 }
 
 
@@ -109,40 +122,31 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* question1: what is spinner- container*/
 
 
-
-/*homepage styling*/
-html { 
-    background: url(images/bg.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-    
-
-body {
-    /*background-image: url("images/background.png");*/
-    /*background-color: #ddd;*/
+* body{
+   /* background-image: url("/images/background.jpg");*/
+    background-color: #f2f2f4;
 }
 
 .title{
   text-align: center;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   margin-top: 15%;
-
 }
 
 .appName{
   text-align: center;
-  font-size: 70pt;
+  font-size: 8rem;
   color: #F77D0F;
 }
 
+.title > p{
+  padding: 10px;
+}
 
 
-/*----------------------------play page styling----------------------------------------------------------*/
+ /*playpage styling*/
 .filter{
-  margin-top: 15%;
+  margin-top: 2%;
   margin-bottom: 15%;
 }
 
@@ -163,3 +167,83 @@ body {
   /*display: inline;*/
     text-align: center;
 }
+
+.current{
+  font-size: 3rem;
+  color: #F78824;
+  font-weight: bold;
+  text-align: center;
+  border: 1em;
+}
+
+.uncurrent{
+  font-size: 2.2rem;
+  text-align: center;
+  border: 1em;
+}
+
+.uparrow{
+  margin-bottom: 20%;
+}
+
+.downarrow{
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.tickBox{
+  margin-bottom: 10%;
+}
+
+
+
+/*arrow left and right*/
+/* Actual arrows
+----------------------*/
+
+.arrow{ }
+.arrow::before{ content:'';
+  display:block; 
+  padding:50px;
+  box-shadow:-1px -1px 0 1px #cdcdcd; 
+  cursor:pointer; 
+  -webkit-transform:rotate(-45deg);
+  transform:rotate(-45deg); 
+  -webkit-transition:.3s;
+  transition:.3s; }
+.arrow:hover::before{ box-shadow:-2px -2px 0 2px #F78824; }
+.arrow.right::before{ box-shadow:1px 1px 0 1px #cdcdcd; }
+.arrow.right:hover::before{ box-shadow:2px 2px 0 2px #F78824; }
+
+ 
+/* Basic page reset for this demo
+--------------------------------------*/
+  
+.arrow{ position:absolute; top:50%; margin-left: 12.5%; margin-right: 12.5%; }
+
+
+/*arrow up and down*/
+/* Actual arrows
+----------------------*/
+
+.arrow2{ }
+.arrow2::before{ content:'';
+  display:block; 
+  padding:50px; 
+  width: 100%;
+  box-shadow:-1px -1px 0 1px #cdcdcd; 
+  cursor:pointer; 
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg); 
+  -webkit-transition:.3s;
+  transition:.3s; }
+.arrow2:hover::before{ box-shadow:-2px -2px 0 2px #F78824; }
+.arrow2.down::before{ box-shadow:1px 1px 0 1px #cdcdcd; }
+.arrow2.down:hover::before{ box-shadow:2px 2px 0 2px#F78824; }
+ 
+ 
+/* Basic page reset for this demo
+--------------------------------------*/
+
+.arrow2{ position:absolute; top:50%;  margin-left: 12.5%; margin-right: 12.5%;}
+

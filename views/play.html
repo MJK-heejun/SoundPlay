@@ -1,15 +1,25 @@
-
-
 <div ng-show="view=='0'">
 	<!-- loading view -->
-	<div class="margin-lr-auto" style="width:50%; height: 50px;">
-		<div class="whirly">
-			spinner
+	<div class="margin-lr-auto loadPosition row">
+		<div class="loader col-xs-12">
+			<div class="loader-inner ball-pulse-sync">
+			    <div></div>
+			    <div></div>
+			    <div></div>
+			</div>
 		</div>		
 	</div>
 	<div class="loading-msg">spinner</div>
-
 </div>
+
+<!-- <div ng-show="view=='0'" class="loader loaderPost">
+
+
+    <div class="loading-msg">spinner</div>
+</div> -->
+
+
+
 <!--
 <div ng-show="view=='1'">
 	<div class="row">
@@ -36,35 +46,79 @@
 <div ng-show="view==1">
 	<!-- filter view -->
 	<div class="filter">
-		<div class="row">
-			<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
-				UA
+		<div class="row uparrow">
+			<div class="col-xs-4 tac"><p></p></div>
+			<div class="col-xs-8 tac" ng-click="upDownArrowAction('u')">     <!-- border-b -->
+				<p class="arrow2 top"> </p> 
 			</div>
-		</div>	
+			<div class="col-xs-4 tac"><p></p></div>
+		</div>
+
 		<div class="row">
-			<div class="col-xs-12 tac">
+			<div class="col-xs-2" ng-click="changeView('l')">
+				<p class="arrow left"></p>
+			</div>
+			<div class="col-xs-8">
+				<div class="row">
+					<div class="tac uncurrent">
+						{{filter_view_selection_arr[f_v_s_p_index]}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="tac current" >
+						{{filter_view_selection_arr[f_v_s_c_index]}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="tac uncurrent" >
+						{{filter_view_selection_arr[f_v_s_n_index]}}
+					</div>
+				</div>				
+			</div>
+			<div class="col-xs-2" ng-click="changeView('r')">
+				<p class="arrow right"></p>
+			</div>			
+		</div>
+
+		<div class="row downarrow">
+			<div class="col-xs-4 tac"><p></p></div>
+			<div class="col-xs-8 tac" ng-click="upDownArrowAction('d')">
+				<p class="arrow2 down"></p>
+			</div>
+			<div class="col-xs-4 tac"><p></p></div>
+		</div>
+
+<!--
+		<div class="row">
+			<div class="col-xs-12 tac uncurrent">
 				{{filter_view_selection_arr[f_v_s_p_index]}}
 			</div>
-		</div>		
+		</div>	
+
 		<div class="col-xs-2" ng-click="changeView('l')">
-			LA
+			<p class="arrow left"></p>
 		</div>
-		<div class="col-xs-8 tac">
+
+		<div class="col-xs-8 tac current" >
 			{{filter_view_selection_arr[f_v_s_c_index]}}
 		</div>
+
 		<div class="col-xs-2" ng-click="changeView('r')">
-			RA
+			<p class="arrow right"></p>
 		</div>	
+
 		<div class="row">
-			<div class="col-xs-12 tac">
+			<div class="col-xs-12 tac uncurrent">
 				{{filter_view_selection_arr[f_v_s_n_index]}}
 			</div>
 		</div>	
-		<div class="row">
+
+		<div class="row up-down">
 			<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
-				DA
+				<p class="arrow2 down"> </p>
 			</div>
 		</div>	
+-->
 	</div>	
 </div>
 
@@ -72,20 +126,23 @@
 	<!-- spatial sound view -->
 	<div class="filter">
 		<div class="row">
+
 			<div class="col-xs-2" ng-click="changeView('l')">
-				LA
+				<p class="arrow left"></p>
 			</div>
+
 			<div class="col-xs-8 tac">
-				<p>Spatial Sound</p>
-				Use accelerometer 
-				<input type="checkbox" ng-model='is_accelerometer_enabled' />
+				<p class="current">Spatial Sound</p>
+				<div class="tickBox">Use accelerometer <input type="checkbox" ng-model='is_accelerometer_enabled' /></div>
 				<form>
 					<input id="accel_range" type="range" ng-model="spatial_x" min="-10" max="10" step="0.1" value="0" >			
 				</form>
 			</div>
+
 			<div class="col-xs-2" ng-click="changeView('r')">
-				RA
-			</div>		
+				<p class="arrow right"></p>
+			</div>
+
 		</div>
 	</div>	
 </div>
@@ -94,20 +151,23 @@
 	<!-- playback rate view -->
 	<div class="filter">
 		<div class="row">
+
 			<div class="col-xs-2" ng-click="changeView('l')">
-				LA
+				<p class="arrow left"></p>
 			</div>
+
 			<div class="col-xs-8 tac">
-				<p>Playback Rate</p>
-				Use GPS speed detector
-				<input type="checkbox" ng-model='is_geolocation_enabled' />		
+				<p class="current">Playback Rate</p>
+				<div class="tickBox">Use GPS speed detector<input type="checkbox" ng-model='is_geolocation_enabled' /></div>
 				<form>
 					<input type="range" ng-model="playback_rate" min="0" max="3" step="0.1" value="1">
 				</form>	
 			</div>
+
 			<div class="col-xs-2" ng-click="changeView('r')">
-				RA
-			</div>	
+				<p class="arrow right"></p>
+			</div>
+
 		</div>
 	</div>	
 </div>
@@ -115,22 +175,39 @@
 
 
 <br/><br/>
-<div ng-show="view!='0'" ng-click="play()" class="play">
+
+<button type="button" class="btn btn-default btn-lg btn-block play" ng-show="view!='0'" ng-click="play()">
 	Play
-</div>
+</button>
+
+<button type="button" class="btn btn-default btn-lg btn-block play" ng-show="view!='0'" ng-click="stop()">
+	Stop
+</button>
+
+<!-- <div ng-show="view!='0'" ng-click="play()" class="play">
+	Play
+</div> -->
 
 <br/>
 
-<div ng-show="view!='0'" ng-click="stop()" class="stop">
+<!-- <div ng-show="view!='0'" ng-click="stop()" class="stop">
 	Stop
-</div>
+</div> -->
 
-<br/><br/>
+<br/><br/><br/><br/>
 
-<div ng-show="view!='0'" ng-click="saveDb()" class="save">
+<button type="button" class="btn btn-default btn-lg btn-block save" ng-show="view!='0'" ng-click="saveDb()">
+	Save the setting
+</button>
+
+<button type="button" class="btn btn-default btn-lg btn-block reset"  ng-show="view!='0'" ng-click="resetDb()">
+	Reset the setting
+</button>
+
+<!-- <div ng-show="view!='0'" ng-click="saveDb()" class="save">
 	Save the setting
 </div>
-
-<div ng-show="view!='0'" ng-click="resetDb()" class="reset">
+ -->
+<!-- <div ng-show="view!='0'" ng-click="resetDb()" class="reset">
 	Reset the setting
-</div>
+</div> -->
