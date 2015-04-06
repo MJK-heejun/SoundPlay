@@ -35,12 +35,45 @@
 <div ng-show="view==1">
 	<!-- filter view -->
 	<div class="filter">
-		<div class="row up-down">
+		<div class="row up-down border-b">
 			<div class="col-xs-12 tac" ng-click="upDownArrowAction('u')">
-				<p class="arrow2 top"> </p>
+				<p class="arrow2 top">at </p>
 			</div>
 		</div>
 
+		<div class="row border-b">
+			<div class="col-xs-2" ng-click="changeView('l')">
+				<p class="arrow left">al</p>
+			</div>
+			<div class="col-xs-8">
+				<div class="row border-b">
+					<div class="col-xs-8 tac uncurrent">
+						{{filter_view_selection_arr[f_v_s_p_index]}}
+					</div>
+				</div>
+				<div class="row border-b">
+					<div class="col-xs-8 tac current" >
+						{{filter_view_selection_arr[f_v_s_c_index]}}
+					</div>
+				</div>
+				<div class="row border-b">
+					<div class="col-xs-8 tac uncurrent" >
+						{{filter_view_selection_arr[f_v_s_n_index]}}
+					</div>
+				</div>				
+			</div>
+			<div class="col-xs-2" ng-click="changeView('r')">
+				<p class="arrow right">ar</p>
+			</div>			
+		</div>
+
+		<div class="row border-b">
+			<div class="col-xs-12 tac" ng-click="upDownArrowAction('d')">
+				<p class="arrow2 down"> ad</p>
+			</div>
+		</div>
+
+<!--
 		<div class="row">
 			<div class="col-xs-12 tac uncurrent">
 				{{filter_view_selection_arr[f_v_s_p_index]}}
@@ -70,6 +103,7 @@
 				<p class="arrow2 down"> </p>
 			</div>
 		</div>	
+-->
 	</div>	
 </div>
 
@@ -79,7 +113,7 @@
 		<div class="row">
 
 			<div class="col-xs-2" ng-click="changeView('l')">
-				<p class="arrow left"></p>
+				<p class="arrow left">al</p>
 			</div>
 
 			<div class="col-xs-8 tac">
@@ -91,7 +125,7 @@
 			</div>
 
 			<div class="col-xs-2" ng-click="changeView('r')">
-				<p class="arrow right"></p>
+				<p class="arrow right">ar</p>
 			</div>
 
 		</div>
@@ -104,7 +138,7 @@
 		<div class="row">
 
 			<div class="col-xs-2" ng-click="changeView('l')">
-				<p class="arrow left"></p>
+				<p class="arrow left">al</p>
 			</div>
 
 			<div class="col-xs-8 tac">
@@ -116,7 +150,7 @@
 			</div>
 
 			<div class="col-xs-2" ng-click="changeView('r')">
-				<p class="arrow right"></p>
+				<p class="arrow right">ar</p>
 			</div>
 
 		</div>
