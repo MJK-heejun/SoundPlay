@@ -248,11 +248,11 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .arrow2{ position:absolute; margin-left: 8%; margin-right: 15%;}
 
 .RightArrow{
-  margin-left: -23pt;
+  margin-left: -25pt;
 }
 
 .LeftArrow{
-   margin-right: -20pt;
+   margin-right: -23pt;
 }
 
 
