@@ -320,3 +320,15 @@ background-size:15px 15px;
 .accelerometer{
   margin-top: 9%;
 }
+
+
+
+
+/* home button */
+.glyphicon-home{
+  color: #b2b2b1;
+}
+
+.glyphicon-home:hover:{
+  color: #b2b2b1;
+}

@@ -85,7 +85,7 @@ angular.module('soundPlay')
       request.responseType = "arraybuffer";
       //request.withCredentials = true;
       //console.log(request.withCredentials);
-      $('.loading-msg').text("making Http Request");
+      $('.loading-msg').text("making http request");
       request.onload = function(){
           $('.loading-msg').text("decoding audio");
           //'request.response' is arraybuffer

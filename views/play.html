@@ -14,7 +14,13 @@
 
 <div ng-show="view==1">
 	<!-- filter view -->
+ 
+	
 	<div class="filter">
+
+		<!-- home menu icon -->
+		<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size:36px"></span> 
+
 		<div class="row uparrow">
 			<div class="col-xs-4 tac"><p></p></div>
 			<div class="col-xs-8 tac" ng-click="upDownArrowAction('u')">     <!-- border-b -->
@@ -58,6 +64,10 @@
 <div ng-show="view==2">
 	<!-- spatial sound view -->
 	<div class="filter">
+
+		<!-- home menu icon -->
+		<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size:36px"></span> 
+
 		<div class="row">
 			<div class="uparrow"></div>
 
@@ -67,14 +77,14 @@
 
 				<div class="col-xs-8 tac">
 					<p class="current">Spatial Sound</p>
-				<!-- 	<div class="tickBox">Use accelerometer <input type="checkbox" ng-model='is_accelerometer_enabled' /></div> -->
-
+			
 					<div class="accelerometer">
 						<form>
 							<input id="accel_range" type="range" ng-model="spatial_x" min="-10" max="10" step="0.1" value="0" >			
 						</form>
 					</div>
-				
+
+					<!-- 	<div class="tickBox">Use accelerometer <input type="checkbox" ng-model='is_accelerometer_enabled' /></div> -->
 					<div class="accelerometer">	
 						<label>
 							<input type="checkbox" name="" value="" ng-model='is_accelerometer_enabled'/>
@@ -94,6 +104,10 @@
 <div ng-show="view==3">
 	<!-- playback rate view -->
 	<div class="filter">
+
+		<!-- home menu icon -->
+		<span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size:36px"></span> 
+
 		<div class="row">
 			<div class="uparrow"></div>
 			<div class="col-xs-2" ng-click="changeView('l')">
