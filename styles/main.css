@@ -147,7 +147,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
  /*playpage styling*/
 .filter{
-  margin-top: 2%;
+  margin-top: 6%;
   margin-bottom: 15%;
 }
 
@@ -253,4 +253,10 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .LeftArrow{
    margin-right: -20pt;
+}
+
+
+.buttonrestyle{
+  width: 50%;
+  font-size: 3vmin;
 }
