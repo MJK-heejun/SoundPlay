@@ -8,7 +8,7 @@
  * Controller of the soundPlay
  */
 angular.module('soundPlay')
-  .controller('PlayCtrl', function ($rootScope, $scope, globals, $location, g_sound, mydb) {
+  .controller('PlayCtrl', function ($rootScope, $scope, globals, $location, g_sound, mydb, $timeout) {
 
 
     //preference restored from indexdb    
@@ -195,7 +195,8 @@ globals.current_music_id = 48230395;
     $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
         try{
           //remove geolocation setinterval
-          clearInterval(geolocation_interval);
+          //clearInterval(geolocation_interval);
+          $scope.is_geolocation_enabled = false;
         }catch(e){
           console.log(e);
         }        
@@ -210,16 +211,24 @@ globals.current_music_id = 48230395;
 
 
     //geolocation enabler change
-    var geolocation_interval;
-    var prev_lat, prev_long;
+    //var geolocation_interval;
+    //var prev_lat, prev_long;
     $scope.$watch('is_geolocation_enabled', function(){      
       if($scope.is_geolocation_enabled){
         if(navigator.geolocation){
+          var prev_lat, prev_long;
           navigator.geolocation.getCurrentPosition(function(position){
             prev_lat = position.coords.latitude;
             prev_long = position.coords.longitude;
-          });
 
+            console.log(prev_lat);
+            console.log(prev_long);
+
+            handleGeolocation(prev_lat, prev_long);            
+          }, function(e){
+            console.log("error:"+e);
+          }, {timeout: 3000, enableHighAccuracy:true});          
+          /*
           geolocation_interval = setInterval(function(){
             var cur_lat;
             var cur_long;
@@ -271,16 +280,19 @@ globals.current_music_id = 48230395;
               $scope.$apply(function() {
               });               
             });        
-          }, 1000);            
+          }, 1000);
+          */            
         }else{
           alert("Geolocation service is not supported by this browser");
         }
       }else{
+        /*
         try{
           clearInterval(geolocation_interval);
         }catch(e){
           console.log(e);
-        }      
+        } 
+        */     
       }
     });    
 
@@ -343,6 +355,72 @@ globals.current_music_id = 48230395;
       }
 
       g_sound.panner.setPosition(parseFloat($scope.spatial_x), 0, 298);
+
+    }
+
+    function handleGeolocation(prev_lat, prev_long){
+
+      var cur_lat;
+      var cur_long;      
+
+      if($scope.is_geolocation_enabled){
+        navigator.geolocation.getCurrentPosition(function(position){
+          cur_lat = position.coords.latitude;
+          cur_long = position.coords.longitude;
+          var meter_per_sec = geolib.getDistance(
+            {latitude: prev_lat, longitude: prev_long},
+            {latitude: cur_lat, longitude: cur_long}
+          );
+          //debugging to convert string to float
+          $scope.playback_rate = parseFloat($scope.playback_rate);
+
+          //normal car speed = 50 kmh = 13.8889 meter per sec
+          // => playback-rate speed up to 3x
+          if(meter_per_sec > 13.8889 && $scope.playback_rate <= 3){
+            $scope.playback_rate += 0.1;
+          //normal cycling speed = 5.81152 meter per sec
+          // => playback-rate speed up to 2x
+          }else if(meter_per_sec > 5.81152){
+            if($scope.playback_rate < 2)
+              $scope.playback_rate += 0.1;
+            else
+              $scope.playback_rate -= 0.1;
+          //man jogging speed = 3.71043 meter per sec
+          // => playback-rate speed up to 1.5x              
+          }else if(meter_per_sec > 3.71043){
+            if($scope.playback_rate < 1.5)
+              $scope.playback_rate += 0.1;
+            else
+              $scope.playback_rate -= 0.1;
+          //man walking speed = 1.38582 meter per sec: but have it as 0.7mps
+          // => playback-rate speed up to 1.3x              
+          }else if(meter_per_sec > 0.7){
+            if($scope.playback_rate < 1.3)
+              $scope.playback_rate += 0.1;
+            else
+              $scope.playback_rate -= 0.1;
+          //reduce playback rate gradually when slower than walking speed
+          }else if(meter_per_sec < 0.7 && $scope.playback_rate > 1){
+            $scope.playback_rate -= 0.1;
+          }
+          $scope.$apply(function() {
+          });     
+          if($scope.is_geolocation_enabled){
+            var timeout = $timeout(function(){
+              handleGeolocation(cur_lat, cur_long);
+            },1000);            
+          }else{
+            console.log('geolocation disabled! - loop terminated');    
+          }
+        }, function(error){
+          console.log("error occured:"+error);
+          var timeout = $timeout(function(){
+            handleGeolocation(prev_lat, prev_long);
+          },1000);
+        }, {timeout: 3000, enableHighAccuracy:true}); 
+      }else{
+        console.log('geolocation disabled! - loop terminated');
+      }
 
     }
 
