@@ -245,10 +245,10 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* Basic page reset for this demo
 --------------------------------------*/
 
-.arrow2{ position:absolute; margin-left: 12.5%; margin-right: 12.5%;}
+.arrow2{ position:absolute; margin-left: 8%; margin-right: 15%;}
 
 .RightArrow{
-  margin-left: -20pt;
+  margin-left: -23pt;
 }
 
 .LeftArrow{
