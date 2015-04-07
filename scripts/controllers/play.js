@@ -198,6 +198,10 @@ angular.module('soundPlay')
       }
     };
 
+    $scope.toHome =function(){
+      $location.path('/main');
+    };
+
 
     //event action when user navigating away manually
     $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
