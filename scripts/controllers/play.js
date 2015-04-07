@@ -41,6 +41,7 @@ angular.module('soundPlay')
     try{
       //stop music to play a new one
       g_sound.source.stop(0);
+      g_sound.isStopped = true;
     }catch(e){
       console.log(e);
     }
@@ -71,8 +72,7 @@ angular.module('soundPlay')
         $scope.playback_rate = saved_data['playback_rate'];
         $scope.spatial_x = saved_data['spatial_x'];
         $scope.filter_type = saved_data['filter_type'];
-      }
-
+      }   
 
       var request = new XMLHttpRequest();      
       //var url = 'http://api.soundcloud.com/tracks/'+globals.current_music_id+'/stream?client_id='+globals.client_id; 
@@ -139,7 +139,6 @@ angular.module('soundPlay')
         }
 
         g_sound.source.start(0, 0);                    
-
       }                                             
     };
 
