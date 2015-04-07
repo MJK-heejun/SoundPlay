@@ -406,7 +406,5 @@ angular.module('soundPlay')
         $scope.changeView('l');        
     });
 
-    $('.glyphicon-home').click(function(){
-      $location.path('/main');
-    });
+
 });
