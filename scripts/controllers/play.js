@@ -386,18 +386,18 @@ angular.module('soundPlay')
 
     hammer.on('swipeup',function(){
       if($scope.view != 0)
-        $scope.upDownArrowAction('u');
+        $scope.upDownArrowAction('d');
     });
     hammer.on('swipedown',function(){
       if($scope.view != 0)      
-        $scope.upDownArrowAction('d');
+        $scope.upDownArrowAction('u');        
     });
     hammer.on('swipeleft',function(){
       if($scope.view != 0)      
-        $scope.changeView('l');
+        $scope.changeView('r');
     });
     hammer.on('swiperight',function(){
       if($scope.view != 0)      
-        $scope.changeView('r');
+        $scope.changeView('l');        
     });
 });
