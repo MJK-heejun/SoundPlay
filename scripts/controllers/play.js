@@ -405,4 +405,8 @@ angular.module('soundPlay')
       if($scope.view != loading_view)      
         $scope.changeView('l');        
     });
+
+    $('.glyphicon-home').click(function(){
+      $location.path('/main');
+    });
 });
