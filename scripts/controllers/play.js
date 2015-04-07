@@ -431,4 +431,12 @@ angular.module('soundPlay')
     }
 
 
+    var view_el = document.querySelector("body");
+    var sw_view = new Hammer(view_el);
+    sw_view.on("swipeup",function(ev){
+      alert("big bang is back!");
+    });
+
+
+
 });

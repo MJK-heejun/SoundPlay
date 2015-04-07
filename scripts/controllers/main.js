@@ -44,48 +44,32 @@ angular.module('soundPlay')
   //search
   $scope.$watch('search_form', function(){      
 
-    var q = $scope.search_form;
-    var limit = 10;
-    var order = 'hotness';
+    if($scope.search_form === undefined || $scope.search_form == ""){
+      //do nothing
+    }else{
+      var q = $scope.search_form;
+      var limit = 10;
+      var order = 'hotness';
 
-    $http.get('http://api.soundcloud.com/tracks.json?client_id='+globals.client_id+'&q='+q+'&order='+order+'&limit='+limit).then(function(res){  
+      $http.get('http://api.soundcloud.com/tracks.json?client_id='+globals.client_id+'&q='+q+'&order='+order+'&limit='+limit).then(function(res){  
 
-      var tracks = res.data;
+        var tracks = res.data;
 
-      var tmp_list = [];
+        var tmp_list = [];
 
-      //only 10 tracks
-      for(var i=0; i< tracks.length; i++){
-        //retrieve id and title of the music
-        var tmp_id = tracks[i].id;
-        var tmp_title = tracks[i].title;
+        //only 10 tracks
+        for(var i=0; i< tracks.length; i++){
+          //retrieve id and title of the music
+          var tmp_id = tracks[i].id;
+          var tmp_title = tracks[i].title;
 
-        tmp_list.push({'id': tmp_id, 'title': tmp_title});
-      }    
-      $scope.music_list = tmp_list;
-    });
+          tmp_list.push({'id': tmp_id, 'title': tmp_title});
+        }    
+        $scope.music_list = tmp_list;
+      });
+    }
 
-/*
-    SC.get('/tracks', { 
-        title: $scope.search_form,
-        limit: 10,
-        sharing: 'public'
-      }, function(tracks) {
 
-      var tmp_list = [];
-
-      //only 10 tracks
-      for(var i=0; i< tracks.length; i++){
-        //retrieve id and title of the music
-        var tmp_id = tracks[i].id;
-        var tmp_title = tracks[i].title;
-
-        tmp_list.push({'id': tmp_id, 'title': tmp_title});
-      }    
-      $scope.music_list = tmp_list;
-
-    });
-*/
   });
 
   $scope.select_music = function(id){
