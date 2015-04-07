@@ -109,6 +109,8 @@ angular.module('soundPlay')
 
     function onError(){
       console.log("error while loading request");
+      swal("The music failed to load","","error");
+      $location.path('/main');
     }
 
 
@@ -385,19 +387,19 @@ angular.module('soundPlay')
     hammer.add(swipe);
 
     hammer.on('swipeup',function(){
-      if($scope.view != 0)
+      if($scope.view == filter_view)
         $scope.upDownArrowAction('d');
     });
     hammer.on('swipedown',function(){
-      if($scope.view != 0)      
+      if($scope.view == filter_view)      
         $scope.upDownArrowAction('u');        
     });
     hammer.on('swipeleft',function(){
-      if($scope.view != 0)      
+      if($scope.view != loading_view)      
         $scope.changeView('r');
     });
     hammer.on('swiperight',function(){
-      if($scope.view != 0)      
+      if($scope.view != loading_view)      
         $scope.changeView('l');        
     });
 });

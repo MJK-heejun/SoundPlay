@@ -268,7 +268,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 input[type=checkbox] {display:none;}
 
-span {
+.accelerometer span {
 background-color:#777777;
 -webkit-border-radius:4px;
 -moz-border-radius:4px;
