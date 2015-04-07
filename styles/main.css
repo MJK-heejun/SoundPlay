@@ -1,4 +1,15 @@
 
+html, body {
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+}
+
+html 
+{ display: table }
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
@@ -8,25 +19,15 @@
   .container {
     max-width: 730px;
   }
-/*
-  .filter{
+
+/*  .filter{
     background-color: #123;
   }*/
 }
 
+@media (max-width: 768px) {
 
-/* Main marketing message and sign up button */
-/*
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
 }
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-*/
-
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -113,9 +114,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .loadPosition{
   margin-top: 35%;
-  padding-left: 42%;
+  padding-left: 36%;
 }
-
 
 
 /*------------------------------ocean'styling starting from here------------------------------------------------*/
@@ -135,8 +135,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .appName{
   text-align: center;
-  font-size: 8rem;
+  font-size: 4rem;
   color: #F77D0F;
+
 }
 
 .title > p{
@@ -146,7 +147,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
  /*playpage styling*/
 .filter{
-  margin-top: 2%;
+  margin-top: 6%;
   margin-bottom: 15%;
 }
 
@@ -169,7 +170,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 .current{
-  font-size: 3rem;
+  font-size: 9vmin;
   color: #F78824;
   font-weight: bold;
   text-align: center;
@@ -177,7 +178,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 .uncurrent{
-  font-size: 2.2rem;
+  font-size: 6vmin;
   text-align: center;
   border: 1em;
 }
@@ -196,7 +197,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 
-
 /*arrow left and right*/
 /* Actual arrows
 ----------------------*/
@@ -204,7 +204,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .arrow{ }
 .arrow::before{ content:'';
   display:block; 
-  padding:50px;
+  padding:8vmin;
   box-shadow:-1px -1px 0 1px #cdcdcd; 
   cursor:pointer; 
   -webkit-transform:rotate(-45deg);
@@ -218,8 +218,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
  
 /* Basic page reset for this demo
 --------------------------------------*/
-  
-.arrow{ position:absolute; top:50%; margin-left: 12.5%; margin-right: 12.5%; }
+/*  
+.arrow{ position:absolute; margin-left: 12.5%; margin-right: 12.5%;}*/
 
 
 /*arrow up and down*/
@@ -229,7 +229,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .arrow2{ }
 .arrow2::before{ content:'';
   display:block; 
-  padding:50px; 
+  padding:8vmin; 
   width: 100%;
   box-shadow:-1px -1px 0 1px #cdcdcd; 
   cursor:pointer; 
@@ -245,5 +245,78 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* Basic page reset for this demo
 --------------------------------------*/
 
-.arrow2{ position:absolute; top:50%;  margin-left: 12.5%; margin-right: 12.5%;}
+.arrow2{ position:absolute; margin-left: 8%; margin-right: 15%;}
 
+.RightArrow{
+  margin-left: -25pt;
+}
+
+.LeftArrow{
+   margin-right: -23pt;
+}
+
+
+.buttonrestyle{
+  width: 50%;
+  font-size: 3vmin;
+}
+
+
+
+
+/*using the checkbox*/
+
+input[type=checkbox] {display:none;}
+
+span {
+background-color:#777777;
+-webkit-border-radius:4px;
+-moz-border-radius:4px;
+border-radius:4px;
+font-weight:500;
+color:#FFF;
+font-size:12pt;
+/*letter-spacing:1px;*/
+text-decoration:none;
+font-family:sans-serif;
+text-align:center;
+width:170px;
+padding: 20px 0;
+cursor:pointer;
+display:block;
+margin: 0 auto;
+-webkit-transition:background-color 150ms ease-in;
+-moz-transition:background-color 150ms ease-in;
+-ms-transition:background-color 150ms ease-in;
+-o-transition:background-color 150ms ease-in;
+transition:background-color 150ms ease-in;
+}
+
+span:hover {
+background-color:#F78824;
+}
+
+input[type=checkbox]:checked + span {
+background-color:#F78824;
+text-decoration:none;
+-webkit-border-radius:4px;
+-moz-border-radius:4px;
+border-radius:4px;
+background:#F78824 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:15px 13px;
+}
+
+input[type=checkbox]:checked:hover + span {
+background-color:#F78824;
+/*color:rgba(255,255,255,0.5);*/
+text-decoration:none;
+-webkit-border-radius:4px;
+-moz-border-radius:4px;
+border-radius:4px;
+background:#dd5244 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNq8110OgjAMAGBGvIY3VESjt9jPg95PT+LccBIZ7dYOWJPGB+g+Ymg3hLW2QeLkcu/y2pSFdvl0eQevehjI3uXbfkMh96TShFq/xhG6J4faAtxEtSBOQTm4QWpnOBWl4CZT69fuYpiCpnBDrB1xLhrjgoFO8F1oGcFslUv4bV32zFoxmOHJta0XMn65dC0UaiddA8UGiN4axeC1cUkdmWviEls/NwL1FqjPNtNvoimPdC3yRCUTiTXbt0R/oSnw2iiK10BBvBY6w2uiE3xJr8oFtcrvxy/fVcyeVdGx98yotcOxN/znHeMUIhdMOG8c4reagssF43VEoT5O4ZJwvNUUFJtcEE5BMXyGpnanf5yDxjiI+hSJj7YunEBvhbuTCh9tD+jiR4ABAJ0SrJgNr1UAAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:15px 15px;
+}
+
+.accelerometer{
+  margin-top: 9%;
+}
